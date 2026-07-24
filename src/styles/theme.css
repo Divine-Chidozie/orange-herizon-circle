@@ -1,0 +1,26 @@
+@theme {
+  /* ==========
+  Colors
+========== */
+
+  --color-primary: #2563eb;
+  --color-secondary: #10b981;
+
+  --color-background: #f8fafc;
+  --color-light-blue: #e0f2fe;
+
+  --color-text: #0f172a;
+
+  --color-gray: #64748b;
+
+  --color-border: #e2e8f0;
+
+  --color-white: #ffffff;
+
+  /* ==========
+Topograpphy
+========== */
+
+  /* --font-family: "Manrope", sans-serif; */
+  --font-sans: "Manrope", sans-serif;
+}
