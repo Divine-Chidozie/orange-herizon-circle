@@ -1,19 +1,60 @@
+import axios from "axios";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+const BASE_URL = "https://horizon-circle.onrender.com";
 import eventconnect from "../../assets/logos/eventconnect.svg";
 import google from "../../assets/logos/google.svg";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  function handleForm(e) {
+  const navigate = useNavigate();
+
+  async function handleForm(e) {
     e.preventDefault();
 
-    console.log({
+    const loginData = {
       email,
       password,
-    });
+    };
+
+    setLoading(true);
+
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/api/auth/login`,
+        loginData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        },
+      );
+
+      console.log(response.data);
+
+      // Save token if the backend returns one
+      if (response.data.token) {
+        localStorage.setItem("token", response.data.token);
+      }
+
+      // Reset form
+      setEmail("");
+      setPassword("");
+
+      // Redirect after successful login
+      navigate("/");
+    } catch (error) {
+      if (error.response?.data?.errors?.length) {
+        alert(error.response.data.errors[0].msg);
+      } else {
+        alert(error.response?.data?.message || "Login failed.");
+      }
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -94,9 +135,10 @@ export default function SignIn() {
           {/* Sign In Button */}
           <button
             type="submit"
-            className="w-full cursor-pointer rounded-md bg-primary py-3 text-sm font-semibold text-white transition hover:bg-blue-700"
+            disabled={loading}
+            className="w-full cursor-pointer rounded-md bg-primary py-3 text-sm font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60"
           >
-            Sign In
+            {loading ? "Signing In..." : "Sign In"}
           </button>
 
           {/* Divider */}

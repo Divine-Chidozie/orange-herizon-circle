@@ -48,19 +48,11 @@ export default function SignUp() {
     setLoading(true);
 
     try {
-      console.log("Sending:", userData);
-
-      const response = await axios.post(
-        `${BASE_URL}/api/auth/register`,
-        userData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
+      await axios.post(`${BASE_URL}/api/auth/register`, userData, {
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
-
-      console.log("Registration successful:", response.data);
+      });
 
       setAccountType("");
       setFirstName("");
@@ -70,18 +62,16 @@ export default function SignUp() {
       setConfirmPassword("");
       setTermsAccepted(false);
 
-      alert("Account created successfully!");
-
-      navigate("/account-created");
+      navigate("/account-created", {
+        state: {
+          message: "Account created successfully!",
+        },
+      });
     } catch (error) {
-      console.error(error.response?.data || error.message);
-
-      if (error.response?.data?.message) {
-        alert(error.response.data.message);
-      } else if (error.response?.data?.errors?.length) {
+      if (error.response?.data?.errors?.length) {
         alert(error.response.data.errors[0].msg);
       } else {
-        alert("Registration failed.");
+        alert(error.response?.data?.message || "Registration failed.");
       }
     } finally {
       setLoading(false);
@@ -191,7 +181,7 @@ export default function SignUp() {
               className="w-full rounded-md border border-border bg-white px-4 py-2 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
             >
               <option value="">Select Account Type</option>
-              <option value="ORGANIZER">Organizer</option>
+              <option value="ORGANIZER">Plannerr</option>
               <option value="VENDOR">Vendor</option>
             </select>
           </div>

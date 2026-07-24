@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -8,6 +8,10 @@ import eventconnect from "../assets/logos/eventconnect.svg";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const navigate = useNavigate();
+
+  const isLoggedIn = !!localStorage.getItem("token");
 
   const navLinks = [
     { name: "Categories", id: "categories" },
@@ -19,6 +23,12 @@ const Navbar = () => {
 
   const closeMenu = () => {
     setIsOpen(false);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    closeMenu();
+    navigate("/");
   };
 
   return (
@@ -49,13 +59,22 @@ const Navbar = () => {
           </ul>
         </nav>
 
-        {/* Desktop Sign Up Button */}
-        <Link
-          to="/sign-up"
-          className="hidden rounded-md bg-primary px-5 py-2 text-sm font-medium text-white transition hover:bg-blue-700 md:block"
-        >
-          Sign Up
-        </Link>
+        {/* Desktop Auth Button */}
+        {isLoggedIn ? (
+          <button
+            onClick={handleLogout}
+            className="hidden cursor-pointer rounded-md bg-red-600 px-5 py-2 text-sm font-medium text-white transition hover:bg-red-700 md:block"
+          >
+            Sign Out
+          </button>
+        ) : (
+          <Link
+            to="/sign-up"
+            className="hidden rounded-md bg-primary px-5 py-2 text-sm font-medium text-white transition hover:bg-blue-700 md:block"
+          >
+            Sign Up
+          </Link>
+        )}
 
         {/* Mobile Menu Button */}
         <button
@@ -72,18 +91,9 @@ const Navbar = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{
-              opacity: 0,
-              height: 0,
-            }}
-            animate={{
-              opacity: 1,
-              height: "auto",
-            }}
-            exit={{
-              opacity: 0,
-              height: 0,
-            }}
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
             transition={{
               duration: 0.3,
               ease: "easeInOut",
@@ -108,15 +118,24 @@ const Navbar = () => {
                   </li>
                 ))}
 
-                {/* Mobile Sign Up Button */}
+                {/* Mobile Auth Button */}
                 <li>
-                  <Link
-                    to="/sign-up"
-                    onClick={closeMenu}
-                    className="block rounded-md bg-primary px-5 py-3 text-center text-sm font-medium text-white transition hover:bg-blue-700"
-                  >
-                    Sign Up
-                  </Link>
+                  {isLoggedIn ? (
+                    <button
+                      onClick={handleLogout}
+                      className="block w-full cursor-pointer rounded-md bg-red-600 px-5 py-3 text-center text-sm font-medium text-white transition hover:bg-red-700"
+                    >
+                      Sign Out
+                    </button>
+                  ) : (
+                    <Link
+                      to="/sign-up"
+                      onClick={closeMenu}
+                      className="block rounded-md bg-primary px-5 py-3 text-center text-sm font-medium text-white transition hover:bg-blue-700"
+                    >
+                      Sign Up
+                    </Link>
+                  )}
                 </li>
               </ul>
             </nav>
