@@ -181,7 +181,7 @@ export default function SignUp() {
               className="w-full rounded-md border border-border bg-white px-4 py-2 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
             >
               <option value="">Select Account Type</option>
-              <option value="ORGANIZER">Plannerr</option>
+              <option value="ORGANIZER">Planner</option>
               <option value="VENDOR">Vendor</option>
             </select>
           </div>
