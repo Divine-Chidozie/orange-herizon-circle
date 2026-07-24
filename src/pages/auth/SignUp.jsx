@@ -13,7 +13,9 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [termsAccepted, setTermsAccepted] = useState(false);
   const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
   async function handleForm(e) {
@@ -29,18 +31,25 @@ export default function SignUp() {
       return;
     }
 
+    if (!termsAccepted) {
+      alert("Please accept the Terms & Conditions.");
+      return;
+    }
+
     const userData = {
       firstName,
       lastName,
       email,
       password,
-      role: accountType,
+      accountType,
+      termsAccepted,
     };
 
     setLoading(true);
 
     try {
       console.log("Sending:", userData);
+
       const response = await axios.post(
         `${BASE_URL}/api/auth/register`,
         userData,
@@ -59,30 +68,23 @@ export default function SignUp() {
       setEmail("");
       setPassword("");
       setConfirmPassword("");
+      setTermsAccepted(false);
 
       alert("Account created successfully!");
 
       navigate("/account-created");
-      // } catch (error) {
-      //   console.error(error);
-
-      //   if (error.response) {
-      //     alert(error.response.data.message || "Registration failed.");
-      //   } else {
-      //     alert("Unable to connect to the server.");
-      //   }
-      // } finally {
-      //   setLoading(false);
-      // }
     } catch (error) {
-      console.log("Full error:", error.response?.data);
-      console.log("Status:", error.response?.status);
+      console.error(error.response?.data || error.message);
 
-      if (error.response) {
-        alert(JSON.stringify(error.response.data));
+      if (error.response?.data?.message) {
+        alert(error.response.data.message);
+      } else if (error.response?.data?.errors?.length) {
+        alert(error.response.data.errors[0].msg);
       } else {
-        alert("Unable to connect to server.");
+        alert("Registration failed.");
       }
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -97,6 +99,7 @@ export default function SignUp() {
         {/* Heading */}
         <div className="mb-8 text-center">
           <h1 className="text-3xl font-bold text-text">Create Account</h1>
+
           <p className="mt-2 text-sm text-gray">
             Create your EventConnect account
           </p>
@@ -114,15 +117,15 @@ export default function SignUp() {
             </label>
 
             <input
-              type="text"
               id="firstName"
+              type="text"
               placeholder="John"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               required
               disabled={loading}
               autoComplete="given-name"
-              className="w-full rounded-md border border-border bg-white px-4 py-2 text-sm placeholder:text-sm placeholder:text-gray-400 outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
+              className="w-full rounded-md border border-border bg-white px-4 py-2 text-sm placeholder:text-gray-400 outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
             />
           </div>
 
@@ -136,15 +139,15 @@ export default function SignUp() {
             </label>
 
             <input
-              type="text"
               id="lastName"
+              type="text"
               placeholder="Doe"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
               required
               disabled={loading}
               autoComplete="family-name"
-              className="w-full rounded-md border border-border bg-white px-4 py-2 text-sm placeholder:text-sm placeholder:text-gray-400 outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
+              className="w-full rounded-md border border-border bg-white px-4 py-2 text-sm placeholder:text-gray-400 outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
             />
           </div>
 
@@ -158,15 +161,15 @@ export default function SignUp() {
             </label>
 
             <input
-              type="email"
               id="email"
+              type="email"
               placeholder="Enter your email address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              autoComplete="email"
               required
               disabled={loading}
-              className="w-full rounded-md border border-border bg-white px-4 py-2 text-sm placeholder:text-sm placeholder:text-gray-400 outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
+              autoComplete="email"
+              className="w-full rounded-md border border-border bg-white px-4 py-2 text-sm placeholder:text-gray-400 outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
             />
           </div>
 
@@ -183,12 +186,13 @@ export default function SignUp() {
               id="account-type"
               value={accountType}
               onChange={(e) => setAccountType(e.target.value)}
+              required
               disabled={loading}
               className="w-full rounded-md border border-border bg-white px-4 py-2 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
             >
               <option value="">Select Account Type</option>
-              <option value="organizer">Organizer</option>
-              <option value="vmendor">Vendor</option>
+              <option value="ORGANIZER">Organizer</option>
+              <option value="VENDOR">Vendor</option>
             </select>
           </div>
 
@@ -202,15 +206,15 @@ export default function SignUp() {
             </label>
 
             <input
-              type="password"
               id="password"
+              type="password"
               placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              autoComplete="new-password"
               required
               disabled={loading}
-              className="w-full rounded-md border border-border bg-white px-4 py-2 text-sm placeholder:text-sm placeholder:text-gray-400 outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
+              autoComplete="new-password"
+              className="w-full rounded-md border border-border bg-white px-4 py-2 text-sm placeholder:text-gray-400 outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
             />
           </div>
 
@@ -224,27 +228,50 @@ export default function SignUp() {
             </label>
 
             <input
-              type="password"
               id="confirm-password"
+              type="password"
               placeholder="Confirm your password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              autoComplete="new-password"
               required
               disabled={loading}
-              className="w-full rounded-md border border-border bg-white px-4 py-2 text-sm placeholder:text-sm placeholder:text-gray-400 outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
+              autoComplete="new-password"
+              className="w-full rounded-md border border-border bg-white px-4 py-2 text-sm placeholder:text-gray-400 outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
             />
           </div>
 
-          {/* Remember Me */}
+          {/* Terms & Conditions */}
           <div>
-            <label className="flex items-center gap-2 text-sm text-primary">
-              <input type="checkbox" className="h-4 w-4 accent-primary" />
-              Remember Me
+            <label className="flex items-start gap-2 text-sm text-gray cursor-pointer">
+              <input
+                type="checkbox"
+                checked={termsAccepted}
+                onChange={(e) => setTermsAccepted(e.target.checked)}
+                disabled={loading}
+                className="mt-1 h-4 w-4 accent-primary"
+              />
+
+              <span>
+                I agree to the{" "}
+                <Link
+                  to="/terms-and-conditions"
+                  className="font-medium text-primary hover:underline"
+                >
+                  Terms & Conditions
+                </Link>{" "}
+                and{" "}
+                <Link
+                  to="/privacy-policy"
+                  className="font-medium text-primary hover:underline"
+                >
+                  Privacy Policy
+                </Link>
+                .
+              </span>
             </label>
           </div>
 
-          {/* Sign Up Button */}
+          {/* Sign Up */}
           <button
             type="submit"
             disabled={loading}
@@ -260,11 +287,10 @@ export default function SignUp() {
             <hr className="flex-1 border-border" />
           </div>
 
-          {/* Google Button */}
+          {/* Google */}
           <button
             type="button"
-            aria-label="Continue with Google"
-            className="flex w-full cursor-pointer items-center justify-center gap-3 rounded-md border border-border bg-white py-3 text-sm font-medium text-gray transition-all duration-200 hover:border-primary hover:bg-gray-50"
+            className="flex w-full cursor-pointer items-center justify-center gap-3 rounded-md border border-border bg-white py-3 text-sm font-medium text-gray transition hover:border-primary hover:bg-gray-50"
           >
             <img src={google} alt="Google" className="h-5 w-5" />
             Continue with Google
