@@ -59,7 +59,7 @@ const Navbar = () => {
           </ul>
         </nav>
 
-        {/* Desktop Auth Button */}
+        {/* Desktop Auth Buttons */}
         {isLoggedIn ? (
           <button
             onClick={handleLogout}
@@ -68,12 +68,21 @@ const Navbar = () => {
             Sign Out
           </button>
         ) : (
-          <Link
-            to="/sign-up"
-            className="hidden rounded-md bg-primary px-5 py-2 text-sm font-medium text-white transition hover:bg-blue-700 md:block"
-          >
-            Sign Up
-          </Link>
+          <div className="hidden items-center gap-3 md:flex">
+            <Link
+              to="/sign-in"
+              className="rounded-md border border-primary px-5 py-2 text-sm font-medium text-primary transition hover:bg-primary hover:text-white"
+            >
+              Sign In
+            </Link>
+
+            <Link
+              to="/sign-up"
+              className="rounded-md bg-primary px-5 py-2 text-sm font-medium text-white transition hover:bg-blue-700"
+            >
+              Sign Up
+            </Link>
+          </div>
         )}
 
         {/* Mobile Menu Button */}
@@ -118,8 +127,8 @@ const Navbar = () => {
                   </li>
                 ))}
 
-                {/* Mobile Auth Button */}
-                <li>
+                {/* Mobile Auth Buttons */}
+                <li className="space-y-3">
                   {isLoggedIn ? (
                     <button
                       onClick={handleLogout}
@@ -128,13 +137,23 @@ const Navbar = () => {
                       Sign Out
                     </button>
                   ) : (
-                    <Link
-                      to="/sign-up"
-                      onClick={closeMenu}
-                      className="block rounded-md bg-primary px-5 py-3 text-center text-sm font-medium text-white transition hover:bg-blue-700"
-                    >
-                      Sign Up
-                    </Link>
+                    <>
+                      <Link
+                        to="/sign-in"
+                        onClick={closeMenu}
+                        className="block rounded-md border border-primary px-5 py-3 text-center text-sm font-medium text-primary transition hover:bg-primary hover:text-white"
+                      >
+                        Sign In
+                      </Link>
+
+                      <Link
+                        to="/sign-up"
+                        onClick={closeMenu}
+                        className="block rounded-md bg-primary px-5 py-3 text-center text-sm font-medium text-white transition hover:bg-blue-700"
+                      >
+                        Sign Up
+                      </Link>
+                    </>
                   )}
                 </li>
               </ul>
