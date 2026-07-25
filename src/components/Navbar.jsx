@@ -12,8 +12,7 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const isLoggedIn = !!localStorage.getItem("token");
-
-  // const user = JSON.parse(localStorage.getItem("user"));
+  const hasAccount = !!localStorage.getItem("hasAccount");
 
   const navLinks = [
     { name: "Categories", id: "categories" },
@@ -29,6 +28,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
     closeMenu();
     navigate("/");
   };
@@ -62,37 +62,36 @@ const Navbar = () => {
         </nav>
 
         {/* Desktop Auth Buttons */}
-        {isLoggedIn ? (
-          <button
-            onClick={handleLogout}
-            className="hidden cursor-pointer rounded-md bg-red-600 px-5 py-2 text-sm font-medium text-white transition hover:bg-red-700 md:block"
-          >
-            Sign Out
-          </button>
-        ) : (
-          <div className="hidden items-center gap-3 md:flex">
+        <div className="hidden items-center gap-3 md:flex">
+          {isLoggedIn ? (
+            <button
+              onClick={handleLogout}
+              className="cursor-pointer rounded-md bg-red-600 px-5 py-2 text-sm font-medium text-white transition hover:bg-red-700"
+            >
+              Sign Out
+            </button>
+          ) : hasAccount ? (
             <Link
               to="/sign-in"
               className="rounded-md border border-primary px-5 py-2 text-sm font-medium text-primary transition hover:bg-primary hover:text-white"
             >
               Sign In
             </Link>
-
+          ) : (
             <Link
               to="/sign-up"
               className="rounded-md bg-primary px-5 py-2 text-sm font-medium text-white transition hover:bg-blue-700"
             >
               Sign Up
             </Link>
-          </div>
-        )}
+          )}
+        </div>
 
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="rounded-md p-2 text-gray transition hover:bg-gray-100 md:hidden"
           aria-label="Toggle navigation menu"
-          aria-expanded={isOpen}
         >
           {isOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
@@ -120,7 +119,6 @@ const Navbar = () => {
                       smooth={true}
                       duration={400}
                       offset={-90}
-                      spy={true}
                       onClick={closeMenu}
                       className="block cursor-pointer transition hover:text-primary"
                     >
@@ -129,33 +127,30 @@ const Navbar = () => {
                   </li>
                 ))}
 
-                {/* Mobile Auth Buttons */}
-                <li className="space-y-3">
+                <li>
                   {isLoggedIn ? (
                     <button
                       onClick={handleLogout}
-                      className="block w-full cursor-pointer rounded-md bg-red-600 px-5 py-3 text-center text-sm font-medium text-white transition hover:bg-red-700"
+                      className="block w-full rounded-md bg-red-600 px-5 py-3 text-center text-sm font-medium text-white"
                     >
                       Sign Out
                     </button>
+                  ) : hasAccount ? (
+                    <Link
+                      to="/sign-in"
+                      onClick={closeMenu}
+                      className="block rounded-md border border-primary px-5 py-3 text-center text-sm font-medium text-primary"
+                    >
+                      Sign In
+                    </Link>
                   ) : (
-                    <>
-                      <Link
-                        to="/sign-in"
-                        onClick={closeMenu}
-                        className="block rounded-md border border-primary px-5 py-3 text-center text-sm font-medium text-primary transition hover:bg-primary hover:text-white"
-                      >
-                        Sign In
-                      </Link>
-
-                      <Link
-                        to="/sign-up"
-                        onClick={closeMenu}
-                        className="block rounded-md bg-primary px-5 py-3 text-center text-sm font-medium text-white transition hover:bg-blue-700"
-                      >
-                        Sign Up
-                      </Link>
-                    </>
+                    <Link
+                      to="/sign-up"
+                      onClick={closeMenu}
+                      className="block rounded-md bg-primary px-5 py-3 text-center text-sm font-medium text-white"
+                    >
+                      Sign Up
+                    </Link>
                   )}
                 </li>
               </ul>

@@ -54,6 +54,9 @@ export default function SignUp() {
         },
       });
 
+      // Remember that this browser has created an account
+      localStorage.setItem("hasAccount", "true");
+
       setAccountType("");
       setFirstName("");
       setLastName("");
