@@ -23,7 +23,7 @@ const CategoryCard = () => {
         >
           <h2 className="text-3xl font-bold">Every Vendor Your Event Needs</h2>
 
-          <p className="text-gray mt-2 max-w-md">
+          <p className="text-gray mt-2 mb-8 max-w-md">
             Browse by category and connect with specialists who bring your
             vision to life.
           </p>
@@ -31,14 +31,14 @@ const CategoryCard = () => {
 
         <Link
           to="/"
-          className="text-primary text-sm font-medium hover:underline"
+          className="text-primary text-xs font-normal hover:underline mt-3"
         >
           View All Categories →
         </Link>
       </div>
 
       {/* Category Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 -mt-8">
         {/* Decoration */}
         <div className="relative overflow-hidden rounded-lg">
           <img

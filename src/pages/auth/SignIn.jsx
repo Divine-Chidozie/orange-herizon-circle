@@ -33,19 +33,48 @@ export default function SignIn() {
         },
       );
 
-      console.log(response.data);
+      console.log("LOGIN RESPONSE:", response.data);
+      console.log("USER:", response.data.user);
+      console.log("ROLE:", response.data.user?.role);
 
-      // Save token if the backend returns one
-      if (response.data.token) {
-        localStorage.setItem("token", response.data.token);
+      // Get token and user from the response
+      const { token, user } = response.data;
+
+      // Save token
+      if (token) {
+        localStorage.setItem("token", token);
+      }
+
+      // Save user
+      if (user) {
+        localStorage.setItem("user", JSON.stringify(user));
       }
 
       // Reset form
       setEmail("");
       setPassword("");
 
-      // Redirect after successful login
-      navigate("/");
+      // const user = response.data.user;
+
+      // Save token
+      // localStorage.setItem("token", response.data.token);
+
+      // Save user
+      // localStorage.setItem("user", JSON.stringify(user));
+
+      // Redirect
+      if (user.role === "planner" || user.role === "ORGANIZER") {
+        navigate("/planner/dashboard");
+      } else if (user.role === "vendor" || user.role === "VENDOR") {
+        navigate("/vendor/dashboard");
+      } else {
+        navigate("/");
+      }
+
+      // const user = JSON.parse(localStorage.getItem("user"));
+
+      // console.log(user.name);
+      // console.log(user.role);
     } catch (error) {
       if (error.response?.data?.errors?.length) {
         alert(error.response.data.errors[0].msg);

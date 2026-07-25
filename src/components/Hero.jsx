@@ -44,9 +44,7 @@ const Hero = () => {
             </h1>
 
             <p className="mt-4 max-w-xl text-gray">
-              EventConnect is the marketplace that connects organizers with
-              vetted, reviewed, and reliable vendors—from décor and catering to
-              photography and venues.
+              Discover vendors, book services,, manage payments, and keep every detail of your event organized-all in one place.
             </p>
           </div>
 
