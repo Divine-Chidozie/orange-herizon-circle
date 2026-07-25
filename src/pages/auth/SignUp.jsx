@@ -41,7 +41,7 @@ export default function SignUp() {
       lastName,
       email,
       password,
-      accountType,
+      role: accountType,
       termsAccepted,
     };
 

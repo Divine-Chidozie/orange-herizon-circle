@@ -16,9 +16,7 @@ export default function AppRoutes() {
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/account-created" element={<AccountCreated />} />
 
-        <Route path="PlannerDashboard" element={<PlannerDashboard />} />
-
-        {/* <Route path="/vendor/dashboard" element={<VendorDashboard />} /> */}
+        <Route path="/planner/dashboard" element={<PlannerDashboard />} />
       </Routes>
     </BrowserRouter>
   );

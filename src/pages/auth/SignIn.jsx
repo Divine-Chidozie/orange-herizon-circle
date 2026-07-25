@@ -34,39 +34,27 @@ export default function SignIn() {
       );
 
       console.log("LOGIN RESPONSE:", response.data);
-      console.log("USER:", response.data.user);
-      console.log("ROLE:", response.data.user?.role);
 
-      // Get token and user from the response
-      const { token, user } = response.data;
+      const { token, data } = response.data;
+      const user = data;
 
-      // Save token
+      console.log("USER DATA:", user);
+
       if (token) {
         localStorage.setItem("token", token);
       }
 
-      // Save user
       if (user) {
         localStorage.setItem("user", JSON.stringify(user));
       }
 
-      // Reset form
       setEmail("");
       setPassword("");
 
-      // const user = response.data.user;
-
-      // Save token
-      // localStorage.setItem("token", response.data.token);
-
-      // Save user
-      // localStorage.setItem("user", JSON.stringify(user));
-
-      // Redirect
-      if (user.role === "planner" || user.role === "ORGANIZER") {
-        navigate("/PlannerDashboard");
-      } else if (user.role === "vendor" || user.role === "VENDOR") {
-        // navigate("/vendor/dashboard");
+      if (user?.role === "PLANNER") {
+        navigate("/planner/dashboard");
+      } else if (user?.role === "VENDOR") {
+        navigate("/vendor/dashboard");
       } else {
         navigate("/");
       }
