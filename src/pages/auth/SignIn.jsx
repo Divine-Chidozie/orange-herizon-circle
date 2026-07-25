@@ -64,25 +64,25 @@ export default function SignIn() {
 
       // Redirect
       if (user.role === "planner" || user.role === "ORGANIZER") {
-        navigate("/planner/dashboard");
+        navigate("/PlannerDashboard");
       } else if (user.role === "vendor" || user.role === "VENDOR") {
-        navigate("/vendor/dashboard");
+        // navigate("/vendor/dashboard");
       } else {
         navigate("/");
       }
-
-      // const user = JSON.parse(localStorage.getItem("user"));
-
-      // console.log(user.name);
-      // console.log(user.role);
     } catch (error) {
-      if (error.response?.data?.errors?.length) {
-        alert(error.response.data.errors[0].msg);
+      console.log(error);
+
+      if (error.response) {
+        console.log("Status:", error.response.status);
+        console.log("Response:", error.response.data);
+
+        alert(JSON.stringify(error.response.data, null, 2));
+      } else if (error.request) {
+        alert("Server did not respond.");
       } else {
-        alert(error.response?.data?.message || "Login failed.");
+        alert(error.message);
       }
-    } finally {
-      setLoading(false);
     }
   }
 

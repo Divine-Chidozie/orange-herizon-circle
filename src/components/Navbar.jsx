@@ -13,6 +13,8 @@ const Navbar = () => {
 
   const isLoggedIn = !!localStorage.getItem("token");
 
+  // const user = JSON.parse(localStorage.getItem("user"));
+
   const navLinks = [
     { name: "Categories", id: "categories" },
     { name: "Why Us", id: "why-us" },

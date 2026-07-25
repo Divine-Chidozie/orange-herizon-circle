@@ -106,7 +106,7 @@ const PlannerSideBar = () => {
               </p>
             </div>
 
-            <div>a
+            <div>
               <h4 className="text-sm font-semibold">Sarah Adeyemi</h4>
               <span className="text-xs text-gray">Planner</span>
             </div>
@@ -114,14 +114,13 @@ const PlannerSideBar = () => {
 
           <hr className="mt-6 border-gray-200" />
 
-          <main className="overflow-x-hidden">s
+          <main className="overflow-x-hidden">
             <div className="flex justify-between items-center p-5">
               <h2 className="font-semibold text-md">Enquiry Status</h2>
               <a href="" className="text-xs text-primary">
                 View all enquires
               </a>
             </div>
-
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4">
               {/* first card container with 2 inner card */}
               <div className="first-card flex flex-col px-5 py-4 gap-3 border border-gray rounded-2xl">
@@ -174,7 +173,6 @@ const PlannerSideBar = () => {
                 </div>
               </div>
             </div>
-
             <section className="mt-10">
               <div className="flex flex-col gap-4 p-5">
                 <h2 className="font-semibold text-md">
@@ -239,7 +237,6 @@ const PlannerSideBar = () => {
                 </div>
               </div>
             </section>
-
             {/* Recommended videos section */}
             <section className="mt-3">
               <div className="flex gap-4 p-5  justify-between items-center ">
