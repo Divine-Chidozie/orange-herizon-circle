@@ -316,10 +316,6 @@ const TermsAndConditions = () => {
             please contact us:
           </p>
 
-          {/* <p className="mt-4 text-gray-800 font-medium">
-            Email: legal@eventconnect.com
-          </p> */}
-
           <a
             href="mailto:testemail4circointern@gmail.com"
             className="mt-4 inline-block font-medium text-primary hover:underline"

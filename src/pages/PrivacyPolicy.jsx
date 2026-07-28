@@ -375,15 +375,22 @@ const PrivacyPolicy = () => {
           <div className="mt-5 rounded-xl border border-gray-200 bg-gray-50 p-5">
             <p className="font-medium text-gray-900">EventConnect</p>
 
-            <p className="mt-2 text-gray-600">
+            {/* <p className="mt-2 text-gray-600">
               Email:{" "}
               <span className="font-medium">privacy@eventconnect.com</span>
-            </p>
+            </p> */}
 
-            <p className="mt-3 text-sm text-gray-500">
+            {/* <p className="mt-3 text-sm text-gray-500">
               Please replace this email address with your official EventConnect
               privacy or support email before launching the platform.
-            </p>
+            </p> */}
+
+            <a
+              href="mailto:testemail4circointern@gmail.com"
+              className="mt-4 inline-block font-medium text-primary hover:underline"
+            >
+              testemail4circointern@gmail.com
+            </a>
           </div>
         </section>
 
