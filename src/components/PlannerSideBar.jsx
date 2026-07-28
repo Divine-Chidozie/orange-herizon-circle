@@ -12,6 +12,7 @@ import plannerdashboardenquire from "../assets/icons/plannerdashboardenquire.png
 import plannerdashboardnotification from "../assets/icons/plannerdashboardnotification.png";
 import plannerdashboardprofile from "../assets/icons/plannerdashboardprofile.png";
 import plannerdashboardsetting from "../assets/icons/plannerdashboardsetting.png";
+import logout from "../assets/icons/logout.svg";
 
 import plannerresponse2 from "../assets/icons/plannerresponse2.png";
 import planneraccepted from "../assets/icons/planneraccepted.png";
@@ -91,6 +92,12 @@ const PlannerSideBar = () => {
       id: 6,
       icon: plannerdashboardsetting,
       text: "Settings",
+    },
+
+    {
+      id: 6,
+      icon: logout,
+      text: "Logout",
     },
   ];
 
