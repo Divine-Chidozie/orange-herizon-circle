@@ -316,9 +316,9 @@ const TermsAndConditions = () => {
             please contact us:
           </p>
 
-          <p className="mt-4 text-gray-800 font-medium">
+          {/* <p className="mt-4 text-gray-800 font-medium">
             Email: legal@eventconnect.com
-          </p>
+          </p> */}
 
           <a
             href="mailto:testemail4circointern@gmail.com"
