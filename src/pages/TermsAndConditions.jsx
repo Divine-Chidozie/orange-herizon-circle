@@ -4,17 +4,18 @@ const TermsAndConditions = () => {
   return (
     <section className="bg-gray-50 py-12">
       {/* Header Navigation */}
-      <div className="mx-auto mb-6 flex max-w-5xl items-center justify-between">
+
+      <div className="mx-auto mb-6 flex max-w-5xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <Link
           to="/"
-          className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-100"
+          className="rounded-md border border-gray-300 bg-white px-4 py-2 text-center text-sm font-medium text-gray-700 transition hover:bg-gray-100"
         >
           ← Back to Home
         </Link>
 
         <Link
           to="/sign-up"
-          className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700"
+          className="rounded-md bg-primary px-4 py-2 text-center text-sm font-medium text-white transition hover:bg-blue-700"
         >
           Create Account
         </Link>
