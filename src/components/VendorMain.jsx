@@ -36,7 +36,7 @@ function VendorMain() {
               </Link>
             </div>
           </div>
-
+s
           {/* Content Below Blue Card */}
           <div className="mt-6">
             {/* <h2 className="text-lg font-semibold text-text">Hello</h2> */}
