@@ -95,7 +95,7 @@ const PlannerSideBar = () => {
     },
 
     {
-      id: 6,
+      id: 7,
       icon: logout,
       text: "Logout",
     },

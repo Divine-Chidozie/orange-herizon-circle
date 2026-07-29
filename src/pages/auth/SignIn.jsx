@@ -51,9 +51,9 @@ export default function SignIn() {
       setEmail("");
       setPassword("");
 
-      if (user?.role === "PLANNER") {
+      if (user.role === "ORGANIZER") {
         navigate("/planner/dashboard");
-      } else if (user?.role === "VENDOR") {
+      } else if (user.role === "VENDOR") {
         navigate("/vendor/dashboard");
       } else {
         navigate("/");
