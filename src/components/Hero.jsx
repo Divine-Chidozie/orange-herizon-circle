@@ -44,7 +44,8 @@ const Hero = () => {
             </h1>
 
             <p className="mt-4 max-w-xl text-gray">
-              Discover vendors, book services,, manage payments, and keep every detail of your event organized-all in one place.
+              Discover vendors, book services,, manage payments, and keep every
+              detail of your event organized-all in one place.
             </p>
           </div>
 
@@ -52,7 +53,7 @@ const Hero = () => {
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link
-                to="/vendors"
+                to="/sign-in"
                 className="flex items-center gap-2 rounded-full border border-border bg-primary px-5 py-3 text-sm font-medium text-white transition hover:bg-blue-700"
               >
                 <img src={findvendors} alt="Find Vendors" className="h-4 w-4" />
@@ -62,7 +63,7 @@ const Hero = () => {
 
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link
-                to="/become-vendor"
+                to="/sign-in"
                 className="flex items-center gap-2 rounded-full border-2 border-primary px-5 py-3 text-sm font-semibold text-primary transition hover:bg-primary hover:text-white"
               >
                 <img
