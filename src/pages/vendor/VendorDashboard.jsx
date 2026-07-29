@@ -1,4 +1,4 @@
-// import { Link } from "react-scroll";
+import { Link, useNavigate } from "react-router-dom";
 import eventconnect from "../../assets/logos/eventconnect.svg";
 
 import BloomCoEvents from "../../assets/icons/BloomCoEvents.png";
@@ -14,31 +14,41 @@ import logout from "../../assets/icons/logout.svg";
 import VendorMain from "../../components/VendorMain";
 
 function VendorDashboard() {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    const confirmLogout = window.confirm("Are you sure you want to logout?");
+
+    if (!confirmLogout) return;
+
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    localStorage.removeItem("hasAccount");
+
+    navigate("/sign-in", { replace: true });
+  };
+
   const plannerIcons = [
     {
       id: 1,
       icon: plannerdashboardhome,
       text: "Home",
     },
-
     {
       id: 2,
       icon: plannerdashboardsearch,
       text: "Discover Vendors",
     },
-
     {
       id: 3,
       icon: plannerdashboardenquire,
-      text: "My enquires",
+      text: "My Enquiries",
     },
-
     {
       id: 4,
       icon: plannerdashboardnotification,
       text: "Notifications",
     },
-
     {
       id: 5,
       icon: plannerdashboardprofile,
@@ -49,18 +59,25 @@ function VendorDashboard() {
       icon: plannerdashboardsetting,
       text: "Settings",
     },
-
     {
       id: 7,
       icon: logout,
       text: "Logout",
+      action: handleLogout,
     },
   ];
+
   return (
     <div className="flex flex-col lg:flex-row w-full">
       <aside className="w-full lg:w-72 shrink-0 border-b lg:border-b-0 lg:border-r border-border bg-white px-4 sm:px-6 py-6">
         <div className="flex gap-5">
-          <img src={eventconnect} className="w-28 sm:w-32 lg:w-36" />
+          <Link to="/">
+            <img
+              src={eventconnect}
+              alt="EventConnect"
+              className="w-28 cursor-pointer sm:w-32 lg:w-36"
+            />
+          </Link>
         </div>
 
         <hr className="mt-6 border-gray-200" />
@@ -68,7 +85,8 @@ function VendorDashboard() {
         {plannerIcons.map((icon) => (
           <div
             key={icon.id}
-            className="mt-2 flex flex-row  cursor-pointer items-center gap-3 rounded-lg px-4 py-3 transition hover:bg-light-blue"
+            onClick={icon.action}
+            className="mt-2 flex cursor-pointer items-center gap-3 rounded-lg px-4 py-3 transition hover:bg-light-blue"
           >
             <img src={icon.icon} alt={icon.text} className="h-4 w-4" />
             <span className="text-xs font-medium text-text">{icon.text}</span>

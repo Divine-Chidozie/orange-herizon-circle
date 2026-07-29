@@ -1,7 +1,81 @@
 import timeicon from "../assets/icons/timeicon.png";
 import { Link } from "react-router-dom";
 
+import vendormessageicon from "../assets/icons/vendormessageicon.png";
+import vendorreply from "../assets/icons/vendorreply.png";
+import vendorchat from "../assets/icons/vendorchat.png";
+import vendorstarrating from "../assets/icons/vendorstarrating.png";
+
+import plannerheadshot from "../assets/icons/plannerheadshot.png";
+import tariqheadshot from "../assets/icons/tariqheadshot.png";
+import sadeheadshot from "../assets/icons/sadeheadshot.png";
+
+import plannerlocation from "../assets/icons/plannerlocation.png";
+
 function VendorMain() {
+  const vendorProfile = [
+    {
+      id: 1,
+      img: vendormessageicon,
+      message: "+3 today",
+      headingNumber: 3,
+      headingDescription: "New Enquires",
+    },
+
+    {
+      id: 2,
+      img: vendorreply,
+      message: "Reply soon",
+      headingNumber: 2,
+      headingDescription: "Waiting Responses",
+    },
+
+    {
+      id: 3,
+      img: vendorchat,
+      message: "+1 today",
+      headingNumber: 5,
+      headingDescription: "Acitive Converstations",
+    },
+
+    {
+      id: 4,
+      img: vendorstarrating,
+      message: "12 reviews",
+      headingNumber: 4.9,
+      headingDescription: "Average Rating",
+    },
+  ];
+
+  const enquiresVendors = [
+    {
+      headshot: plannerheadshot,
+      description: "Wedding Decoration",
+      location: plannerlocation,
+      locationAddress: "Lagos, NG",
+      status: "Waiting",
+      btn: "View",
+    },
+
+    {
+      headshot: tariqheadshot,
+      description: "Event Decoration",
+      location: plannerlocation,
+      locationAddress: "Port Harcourt, NG",
+      status: "Accepting",
+      btn: "View",
+    },
+
+    {
+      headshot: sadeheadshot,
+      description: "Table Setting Decor",
+      location: plannerlocation,
+      locationAddress: "Ibadan, NG",
+      status: "New",
+      btn: "View",
+    },
+  ];
+
   return (
     <div className="w-full px-4 py-4">
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
@@ -36,13 +110,53 @@ function VendorMain() {
               </Link>
             </div>
           </div>
-s
+
           {/* Content Below Blue Card */}
           <div className="mt-6">
             {/* <h2 className="text-lg font-semibold text-text">Hello</h2> */}
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+              {vendorProfile.map((vendor) => (
+                <div
+                  key={vendor.id}
+                  className="rounded-2xl border border-gray-300 bg-white p-5 shadow-sm transition hover:shadow-md"
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex h-6 w-6 items-center justify-center rounded-xl bg-blue-50">
+                      <img
+                        src={vendor.img}
+                        alt={vendor.headingDescription}
+                        className="h-7 w-7"
+                      />
+                    </div>
+
+                    <span className="text-xs font-medium text-green-600 text-shadow-2xs">
+                      {vendor.message}
+                    </span>
+                  </div>
+
+                  <h2 className="mt-5 text-xl font-bold text-text">
+                    {vendor.headingNumber}
+                  </h2>
+
+                  <p className="mt-2 text-xs text-gray">
+                    {vendor.headingDescription}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-6">
+            <div className="flex gap-4 p-5  justify-between items-center ">
+              <h2 className="font-semibold text-sm">Recent Enquires</h2>
+              <a href="" className="text-xs text-primary">
+                View all
+              </a>
+            </div>
           </div>
         </div>
 
+        {/* Cpmplete profile card */}
         {/* Right Card */}
         <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
           <div className="flex items-center justify-between">
