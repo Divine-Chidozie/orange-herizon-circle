@@ -1,4 +1,4 @@
-import { Link } from "react-scroll";
+import { Link, useNavigate } from "react-router-dom";
 
 import PlannerServiceCategory from "../components/PlannerServiceCategory";
 import PlannerFeaturePortfolio from "./PlannerFeaturePortfolio";
@@ -58,49 +58,67 @@ import plannerlocation from "../assets/icons/plannerlocation.png";
 import plannerstar from "../assets/icons/plannerstar.png";
 
 const PlannerSideBar = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    const confirmLogout = window.confirm("Are you sure you want to logout?");
+
+    if (confirmLogout) {
+      // Remove stored login information
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+
+      // Optional: clear everything if that's how your app works
+      // localStorage.clear();
+
+      // Redirect to Sign In page
+      navigate("/sign-in", { replace: true });
+    }
+  };
   const plannerIcons = [
     {
       id: 1,
       icon: plannerdashboardhome,
       text: "Home",
+      path: "/planner/dashboard",
     },
-
     {
       id: 2,
       icon: plannerdashboardsearch,
       text: "Discover Vendors",
+      path: "/planner/discover-vendors",
     },
-
     {
       id: 3,
       icon: plannerdashboardenquire,
-      text: "My enquires",
+      text: "My Enquiries",
+      path: "/planner/enquiries",
     },
-
     {
       id: 4,
       icon: plannerdashboardnotification,
       text: "Notifications",
+      path: "/planner/notifications",
     },
-
     {
       id: 5,
       icon: plannerdashboardprofile,
       text: "Profile",
+      path: "/planner/profile",
     },
     {
       id: 6,
       icon: plannerdashboardsetting,
       text: "Settings",
+      path: "/planner/settings",
     },
-
     {
       id: 7,
       icon: logout,
       text: "Logout",
+      path: "/",
     },
   ];
-
   const recommendedVendors = [
     {
       id: 1,
@@ -301,38 +319,45 @@ const PlannerSideBar = () => {
       <div className="flex flex-col lg:flex-row w-full">
         <aside className="w-full lg:w-72 shrink-0 border-b lg:border-b-0 lg:border-r border-border bg-white px-4 sm:px-6 py-6">
           <div className="flex gap-5">
-            <img src={eventconnect} className="w-28 sm:w-32 lg:w-36" />
+            <Link to="/" className="flex gap-5">
+              <img
+                src={eventconnect}
+                alt="EventConnect Logo"
+                className="w-28 sm:w-32 lg:w-36"
+              />
+            </Link>
           </div>
 
           <hr className="mt-6 border-gray-200" />
 
-          {plannerIcons.map((icon) => (
-            <div
-              key={icon.id}
-              className="mt-2 flex flex-row  cursor-pointer items-center gap-3 rounded-lg px-4 py-3 transition hover:bg-light-blue"
-            >
-              <img src={icon.icon} alt={icon.text} className="h-4 w-4" />
-              <span className="text-xs font-medium text-text">{icon.text}</span>
-            </div>
-          ))}
+          {plannerIcons.map((item) =>
+            item.text === "Logout" ? (
+              <button
+                key={item.id}
+                type="button"
+                onClick={handleLogout}
+                className="mt-2 flex w-full cursor-pointer items-center gap-3 rounded-lg px-4 py-3 text-left transition hover:bg-light-blue"
+              >
+                <img src={item.icon} alt={item.text} className="h-4 w-4" />
 
-          <div className="mt-24 rounded-xl bg-[#E2E8F0] p-5 text-white">
-            <h3 className="text-sm font-semibold text-primary">
-              Upgrade to Pro
-            </h3>
+                <span className="text-xs font-medium text-text">
+                  {item.text}
+                </span>
+              </button>
+            ) : (
+              <Link
+                key={item.id}
+                to={item.path}
+                className="mt-2 flex items-center gap-3 rounded-lg px-4 py-3 transition hover:bg-light-blue"
+              >
+                <img src={item.icon} alt={item.text} className="h-4 w-4" />
 
-            <p className="mt-2 mb-4 text-xs text-gray max-w-full">
-              Connect with more verified vendors, send unlimited enquires, and
-              access premium planning tools.
-            </p>
-
-            <a
-              href=""
-              className="mt-5 flex w-full items-center justify-center border border-primary px-3 py-2 rounded-md text-xs bg-primary text-white transition hover:border hover:text-primary hover:bg-white hover:border-primary"
-            >
-              Upgrade to Pro
-            </a>
-          </div>
+                <span className="text-xs font-medium text-text">
+                  {item.text}
+                </span>
+              </Link>
+            ),
+          )}
         </aside>
 
         <div className="flex min-w-0 flex-col w-full">
