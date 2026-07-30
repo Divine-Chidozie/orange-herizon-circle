@@ -4,7 +4,7 @@ import eventconnect from "../../assets/logos/eventconnect.svg";
 import BloomCoEvents from "../../assets/icons/BloomCoEvents.png";
 
 import plannerdashboardhome from "../../assets/icons/plannerdashboardhome.png";
-import plannerdashboardsearch from "../../assets/icons/plannerdashboardsearch.png";
+// import plannerdashboardsearch from "../../assets/icons/plannerdashboardsearch.png";
 import plannerdashboardenquire from "../../assets/icons/plannerdashboardenquire.png";
 import plannerdashboardnotification from "../../assets/icons/plannerdashboardnotification.png";
 import plannerdashboardprofile from "../../assets/icons/plannerdashboardprofile.png";
@@ -12,6 +12,7 @@ import plannerdashboardsetting from "../../assets/icons/plannerdashboardsetting.
 import logout from "../../assets/icons/logout.svg";
 
 import VendorMain from "../../components/VendorMain";
+import Footer from "../../components/Footer";
 
 function VendorDashboard() {
   const navigate = useNavigate();
@@ -34,15 +35,15 @@ function VendorDashboard() {
       icon: plannerdashboardhome,
       text: "Home",
     },
-    {
-      id: 2,
-      icon: plannerdashboardsearch,
-      text: "Discover Vendors",
-    },
+    // {
+    //   id: 2,
+    //   icon: plannerdashboardsearch,
+    //   text: "Discover Vendors",
+    // },
     {
       id: 3,
       icon: plannerdashboardenquire,
-      text: "My Enquiries",
+      text: "Enquiries",
     },
     {
       id: 4,
@@ -143,6 +144,7 @@ function VendorDashboard() {
 
         <main className="overflow-x-hidden">
           <VendorMain />
+          <Footer />
         </main>
       </div>
     </div>
