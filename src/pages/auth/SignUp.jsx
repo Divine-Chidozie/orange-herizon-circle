@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import eventconnect from "../../assets/logos/eventconnect.svg";
-import google from "../../assets/logos/google.svg";
+// import google from "../../assets/logos/google.svg";
 
 const BASE_URL = "https://horizon-circle.onrender.com";
 
@@ -46,17 +46,39 @@ export default function SignUp() {
     };
 
     setLoading(true);
-
     try {
+      // Register the user
       await axios.post(`${BASE_URL}/api/auth/register`, userData, {
         headers: {
           "Content-Type": "application/json",
         },
       });
 
-      // Remember that this browser has created an account
-      localStorage.setItem("hasAccount", "true");
+      // Automatically log the user in
+      const loginResponse = await axios.post(
+        `${BASE_URL}/api/auth/login`,
+        {
+          email,
+          password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        },
+      );
 
+      const { token, data } = loginResponse.data;
+
+      if (token) {
+        localStorage.setItem("token", token);
+      }
+
+      if (data) {
+        localStorage.setItem("user", JSON.stringify(data));
+      }
+
+      // Clear form
       setAccountType("");
       setFirstName("");
       setLastName("");
@@ -65,11 +87,14 @@ export default function SignUp() {
       setConfirmPassword("");
       setTermsAccepted(false);
 
-      navigate("/account-created", {
-        state: {
-          message: "Account created successfully!",
-        },
-      });
+      // Redirect based on role
+      if (data.role === "ORGANIZER") {
+        navigate("/planner/dashboard");
+      } else if (data.role === "VENDOR") {
+        navigate("/vendor/dashboard");
+      } else {
+        navigate("/");
+      }
     } catch (error) {
       if (error.response?.data?.errors?.length) {
         alert(error.response.data.errors[0].msg);
@@ -281,13 +306,13 @@ export default function SignUp() {
           </div>
 
           {/* Google */}
-          <button
+          {/* <button
             type="button"
             className="flex w-full cursor-pointer items-center justify-center gap-3 rounded-md border border-border bg-white py-3 text-sm font-medium text-gray transition hover:border-primary hover:bg-gray-50"
           >
-            <img src={google} alt="Google" className="h-5 w-5" />
+            <img src={google} alt="Googale" className="h-5 w-5" />
             Continue with Google
-          </button>
+          </button> */}
 
           {/* Sign In */}
           <p className="text-center text-sm text-gray">

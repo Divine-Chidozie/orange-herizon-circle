@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 const BASE_URL = "https://horizon-circle.onrender.com";
 import eventconnect from "../../assets/logos/eventconnect.svg";
-import google from "../../assets/logos/google.svg";
+// import google from "../../assets/logos/google.svg";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -33,12 +33,8 @@ export default function SignIn() {
         },
       );
 
-      console.log("LOGIN RESPONSE:", response.data);
-
       const { token, data } = response.data;
       const user = data;
-
-      console.log("USER DATA:", user);
 
       if (token) {
         localStorage.setItem("token", token);
@@ -48,9 +44,6 @@ export default function SignIn() {
         localStorage.setItem("user", JSON.stringify(user));
       }
 
-      setEmail("");
-      setPassword("");
-
       if (user.role === "ORGANIZER") {
         navigate("/planner/dashboard");
       } else if (user.role === "VENDOR") {
@@ -59,18 +52,13 @@ export default function SignIn() {
         navigate("/");
       }
     } catch (error) {
-      console.log(error);
-
-      if (error.response) {
-        console.log("Status:", error.response.status);
-        console.log("Response:", error.response.data);
-
-        alert(JSON.stringify(error.response.data, null, 2));
-      } else if (error.request) {
-        alert("Server did not respond.");
+      if (error.response?.data?.errors?.length) {
+        alert(error.response.data.errors[0].msg);
       } else {
-        alert(error.message);
+        alert(error.response?.data?.message || "Registration failed.");
       }
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -166,14 +154,14 @@ export default function SignIn() {
           </div>
 
           {/* Google Sign In */}
-          <button
+          {/* <button
             type="button"
             aria-label="Continue with Google"
             className="flex w-full cursor-pointer items-center justify-center gap-3 rounded-md border border-border bg-white py-3 text-sm font-medium text-gray transition-all duration-200 hover:border-primary hover:bg-gray-50"
           >
             <img src={google} alt="Google" className="h-5 w-5" />
             Continue with Google
-          </button>
+          </button> */}
 
           {/* Sign Up Link */}
           <p className="text-center text-sm text-gray">
