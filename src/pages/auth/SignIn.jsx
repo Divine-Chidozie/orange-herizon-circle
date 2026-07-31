@@ -32,9 +32,9 @@ export default function SignIn() {
           },
         },
       );
+      const token = response.data.token;
 
-      const { token, data } = response.data;
-      const user = data;
+      const user = response.data.data || response.data.user || response.data;
 
       // ==========================================
       // Debug: Check what the backend is returning
@@ -51,11 +51,14 @@ export default function SignIn() {
         localStorage.setItem("user", JSON.stringify(user));
       }
 
-      if (user.role === "ORGANIZER") {
+      const role = user.role?.toUpperCase();
+
+      if (role === "ORGANIZER" || role === "PLANNER") {
         navigate("/planner/dashboard");
-      } else if (user.role === "VENDOR") {
+      } else if (role === "VENDOR") {
         navigate("/vendor/dashboard");
       } else {
+        console.log("Unknown Role:", role);
         navigate("/");
       }
     } catch (error) {
