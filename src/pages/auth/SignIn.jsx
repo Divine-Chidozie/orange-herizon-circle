@@ -1,4 +1,7 @@
+
+
 import axios from "axios";
+import { motion } from "framer-motion";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 const BASE_URL = "https://horizon-circle.onrender.com";
@@ -32,13 +35,11 @@ export default function SignIn() {
           },
         },
       );
+
       const token = response.data.token;
 
       const user = response.data.data || response.data.user || response.data;
 
-      // ==========================================
-      // Debug: Check what the backend is returning
-      // ==========================================
       console.log("Login Response:", response.data);
       console.log("User:", user);
       console.log("Role:", user.role);
@@ -73,7 +74,25 @@ export default function SignIn() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-light-blue px-6 py-10">
+    <motion.div
+      initial={{
+        opacity: 0,
+        y: 40,
+      }}
+      animate={{
+        opacity: 1,
+        y: 0,
+      }}
+      exit={{
+        opacity: 0,
+        y: -40,
+      }}
+      transition={{
+        duration: 0.5,
+        ease: "easeOut",
+      }}
+      className="flex min-h-screen items-center justify-center bg-light-blue px-6 py-10"
+    >
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="mb-8 flex justify-center">
@@ -83,6 +102,7 @@ export default function SignIn() {
         {/* Heading */}
         <div className="mb-8 text-center">
           <h1 className="text-3xl font-bold text-text">Welcome Back</h1>
+
           <p className="mt-2 text-sm text-gray">
             Sign in to continue managing your events
           </p>
@@ -131,7 +151,6 @@ export default function SignIn() {
               className="w-full rounded-md border border-border bg-white px-4 py-2 text-sm placeholder:text-sm placeholder:text-gray-400 outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
             />
           </div>
-
           {/* Remember Me & Forgot Password */}
           <div className="flex items-center justify-between">
             <label className="flex items-center gap-2 text-sm text-primary">
@@ -185,6 +204,6 @@ export default function SignIn() {
           </p>
         </form>
       </div>
-    </div>
+    </motion.div>
   );
 }

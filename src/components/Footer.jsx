@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
+import { motion } from "framer-motion";
+import { fadeUp } from "../animations/motion";
 
 import eventconnect from "../assets/logos/eventconnect.svg";
 import footerinternent from "../assets/icons/footerinternent.png";
@@ -16,9 +18,22 @@ const Footer = () => {
     <footer className="bg-primary text-white" id="footer">
       <div className="max-w-7xl mx-auto px-6 py-16">
         {/* Top Footer */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12"
+          variants={{
+            hidden: {},
+            visible: {
+              transition: {
+                staggerChildren: 0.15,
+              },
+            },
+          }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
           {/* Brand */}
-          <div>
+          <motion.div variants={fadeUp}>
             <Link
               to="/"
               onClick={(e) => {
@@ -61,10 +76,10 @@ const Footer = () => {
                 ),
               )}
             </div>
-          </div>
+          </motion.div>
 
           {/* For Planners */}
-          <div>
+          <motion.div variants={fadeUp}>
             <h4 className="text-lg font-semibold mb-5">For Planners</h4>
 
             <ul className="space-y-3 text-sm text-gray-200">
@@ -73,6 +88,7 @@ const Footer = () => {
                   Find Vendors
                 </Link>
               </li>
+
               <li>
                 <ScrollLink
                   to="categories"
@@ -83,6 +99,7 @@ const Footer = () => {
                   Browse Categories
                 </ScrollLink>
               </li>
+
               <li>
                 <ScrollLink
                   to="how-it-works"
@@ -93,12 +110,14 @@ const Footer = () => {
                   How It Works
                 </ScrollLink>
               </li>
+
               <li
                 onClick={() => handleComingSoon("Pricing")}
                 className="cursor-pointer hover:text-white"
               >
                 Pricing
               </li>
+
               <li
                 onClick={() => handleComingSoon("Reviews")}
                 className="cursor-pointer hover:text-white"
@@ -106,31 +125,35 @@ const Footer = () => {
                 Reviews
               </li>
             </ul>
-          </div>
+          </motion.div>
 
           {/* For Vendors */}
-          <div>
+          <motion.div variants={fadeUp}>
             <h4 className="text-lg font-semibold mb-5">For Vendors</h4>
 
             <ul className="space-y-3 text-sm text-gray-200">
               <li className="hover:text-white cursor-pointer">
                 <Link to="/sign-up">Become a Vendor</Link>
               </li>
+
               <li className="hover:text-white cursor-pointer">
                 <Link to="/sign-in">Vendor Login</Link>
               </li>
+
               <li
                 onClick={() => handleComingSoon("Success Stories")}
                 className="hover:text-white cursor-pointer"
               >
                 Success Stories
               </li>
+
               <li
                 onClick={() => handleComingSoon("Resources")}
                 className="hover:text-white cursor-pointer"
               >
                 Resources
               </li>
+
               <li
                 onClick={() => handleComingSoon("Help Center")}
                 className="hover:text-white cursor-pointer"
@@ -138,10 +161,10 @@ const Footer = () => {
                 Help Center
               </li>
             </ul>
-          </div>
+          </motion.div>
 
           {/* Company */}
-          <div>
+          <motion.div variants={fadeUp}>
             <h4 className="text-lg font-semibold mb-5">Company</h4>
 
             <ul className="space-y-3 text-sm text-gray-200">
@@ -151,24 +174,28 @@ const Footer = () => {
               >
                 About Us
               </li>
+
               <li
-                onClick={() => handleComingSoon("About Us")}
+                onClick={() => handleComingSoon("Careers")}
                 className="hover:text-white cursor-pointer"
               >
                 Careers
               </li>
+
               <li
-                onClick={() => handleComingSoon("About Us")}
+                onClick={() => handleComingSoon("Press")}
                 className="hover:text-white cursor-pointer"
               >
                 Press
               </li>
+
               <li
                 onClick={() => handleComingSoon("Contact")}
                 className="hover:text-white cursor-pointer"
               >
                 Contact
               </li>
+
               <li
                 onClick={() => handleComingSoon("Blog")}
                 className="hover:text-white cursor-pointer"
@@ -176,20 +203,28 @@ const Footer = () => {
                 Blog
               </li>
             </ul>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* Bottom Footer */}
-        <div className="border-t border-white/20 mt-12 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-200">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="border-t border-white/20 mt-12 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-200"
+        >
           <p>© 2026 EventConnect. All rights reserved.</p>
 
           <div className="flex items-center gap-6">
             <Link to="/privacy-policy" className="hover:text-white">
               Privacy Policy
             </Link>
+
             <Link to="/terms-and-conditions" className="hover:text-white">
               Terms of Service
             </Link>
+
             <p
               onClick={() => handleComingSoon("Cookies")}
               className="cursor-pointer hover:text-white"
@@ -197,7 +232,7 @@ const Footer = () => {
               Cookies
             </p>
           </div>
-        </div>
+        </motion.div>
       </div>
     </footer>
   );

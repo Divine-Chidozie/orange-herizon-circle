@@ -1,4 +1,5 @@
 import axios from "axios";
+import { motion } from "framer-motion";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import eventconnect from "../../assets/logos/eventconnect.svg";
@@ -21,33 +22,21 @@ export default function SignUp() {
   async function handleForm(e) {
     e.preventDefault();
 
-    // ==========================================
-    // Validate Account Type
-    // ==========================================
     if (!accountType) {
       alert("Please select an account type.");
       return;
     }
 
-    // ==========================================
-    // Validate Password Match
-    // ==========================================
     if (password !== confirmPassword) {
       alert("Passwords do not match.");
       return;
     }
 
-    // ==========================================
-    // Validate Terms & Conditions
-    // ==========================================
     if (!termsAccepted) {
       alert("Please accept the Terms & Conditions.");
       return;
     }
 
-    // ==========================================
-    // User Data
-    // ==========================================
     const userData = {
       firstName,
       lastName,
@@ -60,24 +49,14 @@ export default function SignUp() {
     setLoading(true);
 
     try {
-      // ==========================================
-      // Register User
-      // ==========================================
       await axios.post(`${BASE_URL}/api/auth/register`, userData, {
         headers: {
           "Content-Type": "application/json",
         },
       });
 
-      // ==========================================
-      // User now has an account
-      // Used by Navbar to show Sign In instead
-      // ==========================================
       localStorage.setItem("hasAccount", "true");
 
-      // ==========================================
-      // Clear Form
-      // ==========================================
       setAccountType("");
       setFirstName("");
       setLastName("");
@@ -86,10 +65,6 @@ export default function SignUp() {
       setConfirmPassword("");
       setTermsAccepted(false);
 
-      // ==========================================
-      // DO NOT LOGIN HERE
-      // Send user to Account Created page
-      // ==========================================
       navigate("/account-created");
     } catch (error) {
       if (error.response?.data?.errors?.length) {
@@ -103,7 +78,21 @@ export default function SignUp() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-light-blue px-6 py-10">
+    <motion.div
+      initial={{
+        opacity: 0,
+        y: 40,
+      }}
+      animate={{
+        opacity: 1,
+        y: 0,
+      }}
+      transition={{
+        duration: 0.5,
+        ease: "easeOut",
+      }}
+      className="flex min-h-screen items-center justify-center bg-light-blue px-6 py-10"
+    >
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="mb-8 flex justify-center">
@@ -142,7 +131,6 @@ export default function SignUp() {
               className="w-full rounded-md border border-border bg-white px-4 py-2 text-sm placeholder:text-gray-400 outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
             />
           </div>
-
           {/* Last Name */}
           <div>
             <label
@@ -301,15 +289,6 @@ export default function SignUp() {
             <hr className="flex-1 border-border" />
           </div>
 
-          {/* Google */}
-          {/* <button
-            type="button"
-            className="flex w-full cursor-pointer items-center justify-center gap-3 rounded-md border border-border bg-white py-3 text-sm font-medium text-gray transition hover:border-primary hover:bg-gray-50"
-          >
-            <img src={google} alt="Googale" className="h-5 w-5" />
-            Continue with Google
-          </button> */}
-
           {/* Sign In */}
           <p className="text-center text-sm text-gray">
             Already have an account?{" "}
@@ -322,6 +301,6 @@ export default function SignUp() {
           </p>
         </form>
       </div>
-    </div>
+    </motion.div>
   );
 }

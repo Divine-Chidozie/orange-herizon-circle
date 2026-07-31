@@ -1,3 +1,6 @@
+import { motion } from "framer-motion";
+import { fadeUp } from "../animations/motion";
+
 import vendorstar from "../assets/icons/vendorstar.png";
 import vendorstar2 from "../assets/icons/vendorstar2.png";
 import vendorstar3 from "../assets/icons/vendorstar3.png";
@@ -51,7 +54,13 @@ const PlannerVendor = () => {
   return (
     <section className="max-w-7xl mx-auto px-6 py-16" id="vendors">
       {/* Section Header */}
-      <div className="flex flex-col items-center text-center gap-3 mb-12">
+      <motion.div
+        className="flex flex-col items-center text-center gap-3 mb-12"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
         <h2 className="text-3xl md:text-4xl font-bold">
           Trusted by Planners & Vendors
         </h2>
@@ -60,13 +69,20 @@ const PlannerVendor = () => {
           Thousands of successful events have been planned with confidence
           through EventConnect.
         </p>
-      </div>
+      </motion.div>
 
       {/* Testimonials */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {testimonials.map((testimonial) => (
-          <div
+        {testimonials.map((testimonial, index) => (
+          <motion.div
             key={testimonial.id}
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            transition={{
+              delay: index * 0.15,
+            }}
             className="bg-white border border-border rounded-2xl p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
           >
             {/* Star Rating */}
@@ -92,7 +108,7 @@ const PlannerVendor = () => {
 
               <p className="text-xs text-gray">{testimonial.occupation}</p>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>

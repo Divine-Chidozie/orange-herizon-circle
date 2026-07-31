@@ -1,3 +1,6 @@
+import { motion } from "framer-motion";
+import { fadeUp } from "../animations/motion";
+
 import verifiedicon from "../assets/icons/verifiedicon.png";
 import reviewicon from "../assets/icons/reviewicon.png";
 import pricingicon from "../assets/icons/pricingicon.png";
@@ -48,7 +51,13 @@ const EventCard = () => {
   return (
     <section className="max-w-7xl mx-auto px-6 py-16" id="why-us">
       {/* Section Header */}
-      <div className="flex flex-col items-center text-center gap-3 mb-12">
+      <motion.div
+        className="flex flex-col items-center text-center gap-3 mb-12"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
         <h2 className="text-3xl md:text-4xl font-bold text-dark">
           Why Planners Choose EventConnect
         </h2>
@@ -57,13 +66,20 @@ const EventCard = () => {
           We remove the guesswork from hiring vendors, making it easier to plan
           your event with confidence from start to finish.
         </p>
-      </div>
+      </motion.div>
 
       {/* Feature Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {features.map((feature) => (
-          <div
+        {features.map((feature, index) => (
+          <motion.div
             key={feature.title}
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            transition={{
+              delay: index * 0.1,
+            }}
             className="h-full bg-white border border-border rounded-xl p-6 flex flex-col items-start transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-xl"
           >
             <img
@@ -75,7 +91,7 @@ const EventCard = () => {
             <h4 className="text-lg font-semibold mb-2">{feature.title}</h4>
 
             <p className="text-gray text-sm leading-7">{feature.description}</p>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>

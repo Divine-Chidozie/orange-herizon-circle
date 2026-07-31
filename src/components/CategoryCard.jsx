@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { fadeUp } from "../animations/motion";
 
@@ -40,82 +41,124 @@ const CategoryCard = () => {
       {/* Category Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 -mt-8">
         {/* Decoration */}
-        <div className="relative overflow-hidden rounded-lg">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="relative overflow-hidden rounded-lg"
+        >
           <img
             src={decorationimg}
             alt="Decoration"
             className="w-full h-58 object-cover"
           />
+
           <div className="absolute bottom-4 left-4 text-white">
             <h4 className="font-semibold">Decoration & Styling</h4>
-            <p className="text-sm">1,240 Vendors</p>
+            <p className="text-sm">1,240+ Vendors</p>
           </div>
-        </div>
+        </motion.div>
 
         {/* Catering */}
-        <div className="relative overflow-hidden rounded-lg">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="relative overflow-hidden rounded-lg"
+        >
           <img
             src={cateringimg}
             alt="Catering"
             className="w-full h-58 object-cover"
           />
+
           <div className="absolute bottom-4 left-4 text-white">
             <h4 className="font-semibold">Catering & Cakes</h4>
             <p className="text-sm">980+ Vendors</p>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Photography */}
-        <div className="relative overflow-hidden rounded-lg">
-          <img
-            src={photographyimg}
-            alt="Photography"
-            className="w-full h-58 object-cover"
-          />
-          <div className="absolute bottom-4 left-4 text-white">
-            <h4 className="font-semibold">Photography & Video</h4>
-            <p className="text-sm">1,510+ Vendors</p>
-          </div>
-        </div>
-
-        {/* Music */}
-        <div className="relative overflow-hidden rounded-lg">
-          <img
-            src={musicimg}
-            alt="Music"
-            className="w-full h-58 object-cover"
-          />
-          <div className="absolute bottom-4 left-4 text-white">
-            <h4 className="font-semibold">Music & Entertainment</h4>
-            <p className="text-sm">760+ Vendors</p>
-          </div>
-        </div>
-
-        {/* Venue */}
-        <div className="relative overflow-hidden rounded-lg">
+        {/* venue */}
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="relative overflow-hidden rounded-lg"
+        >
           <img
             src={venueimg}
             alt="Venue"
             className="w-full h-58 object-cover"
           />
+
           <div className="absolute bottom-4 left-4 text-white">
-            <h4 className="font-semibold">Venues & Spaces</h4>
+            <h4 className="font-semibold">Venue & Space</h4>
             <p className="text-sm">540+ Vendors</p>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Stage */}
-        <div className="relative overflow-hidden rounded-lg">
+        {/* music */}
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="relative overflow-hidden rounded-lg"
+        >
           <img
-            src={stageimg}
-            alt="Stage & Lighting"
+            src={musicimg}
+            alt="Music"
             className="w-full h-58 object-cover"
           />
+
+          <div className="absolute bottom-4 left-4 text-white">
+            <h4 className="font-semibold">Music & Entertainment</h4>
+            <p className="text-sm">430+ Vendors</p>
+          </div>
+        </motion.div>
+
+        {/* photography */}
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="relative overflow-hidden rounded-lg"
+        >
+          <img
+            src={photographyimg}
+            alt="Photography"
+            className="w-full h-58 object-cover"
+          />
+
+          <div className="absolute bottom-4 left-4 text-white">
+            <h4 className="font-semibold">Photography & Video Editing</h4>
+            <p className="text-sm">1,510+ Vendors</p>
+          </div>
+        </motion.div>
+
+        {/* stage */}
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="relative overflow-hidden rounded-lg"
+        >
+          <img
+            src={stageimg}
+            alt="Stage"
+            className="w-full h-58 object-cover"
+          />
+
           <div className="absolute bottom-4 left-4 text-white">
             <h4 className="font-semibold">Stage & Lighting</h4>
             <p className="text-sm">430+ Vendors</p>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
