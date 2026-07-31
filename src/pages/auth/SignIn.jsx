@@ -36,6 +36,13 @@ export default function SignIn() {
       const { token, data } = response.data;
       const user = data;
 
+      // ==========================================
+      // Debug: Check what the backend is returning
+      // ==========================================
+      console.log("Login Response:", response.data);
+      console.log("User:", user);
+      console.log("Role:", user.role);
+
       if (token) {
         localStorage.setItem("token", token);
       }

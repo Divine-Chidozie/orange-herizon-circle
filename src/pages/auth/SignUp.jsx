@@ -70,6 +70,12 @@ export default function SignUp() {
       });
 
       // ==========================================
+      // User now has an account
+      // Used by Navbar to show Sign In instead
+      // ==========================================
+      localStorage.setItem("hasAccount", "true");
+
+      // ==========================================
       // Clear Form
       // ==========================================
       setAccountType("");
