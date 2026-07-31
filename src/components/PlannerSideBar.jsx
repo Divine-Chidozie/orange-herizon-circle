@@ -1,4 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Search, SlidersHorizontal } from "lucide-react";
 
 import PlannerServiceCategory from "../components/PlannerServiceCategory";
 import PlannerFeaturePortfolio from "./PlannerFeaturePortfolio";
@@ -60,21 +62,20 @@ import plannerstar from "../assets/icons/plannerstar.png";
 const PlannerSideBar = () => {
   const navigate = useNavigate();
 
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filterBy, setFilterBy] = useState("");
+  const [showFilters, setShowFilters] = useState(false);
+
   const handleLogout = () => {
     const confirmLogout = window.confirm("Are you sure you want to logout?");
 
     if (confirmLogout) {
-      // Remove stored login information
       localStorage.removeItem("token");
       localStorage.removeItem("user");
-
-      // Optional: clear everything if that's how your app works
-      // localStorage.clear();
-
-      // Redirect to Sign In page
       navigate("/sign-in", { replace: true });
     }
   };
+
   const plannerIcons = [
     {
       id: 1,
@@ -112,16 +113,13 @@ const PlannerSideBar = () => {
       text: "Settings",
       path: "/planner/settings",
     },
-    {
-      id: 7,
-      icon: logout,
-      text: "Logout",
-      path: "/",
-    },
+    { id: 7, icon: logout, text: "Logout", path: "/" },
   ];
+
   const recommendedVendors = [
     {
       id: 1,
+      category: "Wedding",
       image: luminarystudios,
       heading: "Luminary Studios",
       description: "Event Decoration & Styling",
@@ -131,13 +129,14 @@ const PlannerSideBar = () => {
       vendorStar: plannerstar,
       vendorRating: "4.9 (128)",
       vendorDescription:
-        "Award-winning event photograpghy with 8+ years of capturing unforgettable moments.",
+        "Award-winning event photography with 8+ years of capturing unforgettable moments.",
       startPrice: "Starting from",
       price: "₦85,000",
       profileBtn: "View Profile",
     },
     {
       id: 2,
+      category: "Conference",
       image: elegantevents,
       heading: "Elegant Events Co.",
       description: "Venues & Spaces",
@@ -154,6 +153,7 @@ const PlannerSideBar = () => {
     },
     {
       id: 3,
+      category: "Wedding",
       image: chiccelebrations,
       heading: "Chic Celebrations",
       description: "Stage & Lighting",
@@ -163,13 +163,14 @@ const PlannerSideBar = () => {
       vendorStar: plannerstar,
       vendorRating: "4.8 (75)",
       vendorDescription:
-        "This image showcaes a dramatic and romantic wedding reception decor with a ....",
+        "This image showcases a dramatic and romantic wedding reception decor...",
       startPrice: "Starting from",
       price: "₦90,000",
       profileBtn: "View Profile",
     },
     {
       id: 4,
+      category: "Wedding",
       image: glamourevent,
       heading: "Glamour Events",
       description: "Wedding Stage Backdrop",
@@ -186,6 +187,7 @@ const PlannerSideBar = () => {
     },
     {
       id: 5,
+      category: "Birthday",
       image: redientevent,
       heading: "Radiant Events",
       description: "Event Decoration & Styling",
@@ -195,13 +197,14 @@ const PlannerSideBar = () => {
       vendorStar: plannerstar,
       vendorRating: "4.5 (50)",
       vendorDescription:
-        "Creating Unforgettable environments with a personal touch and elegance.",
+        "Creating unforgettable environments with a personal touch and elegance.",
       startPrice: "Starting from",
       price: "₦80,000",
       profileBtn: "View Profile",
     },
     {
       id: 6,
+      category: "Birthday",
       image: timelesstouch,
       heading: "Timeless Touch",
       description: "Party Decorator",
@@ -211,13 +214,14 @@ const PlannerSideBar = () => {
       vendorStar: plannerstar,
       vendorRating: "4.4 (44)",
       vendorDescription:
-        "Timeless Touch excels at creating elegant and memorable parties with impeccable",
+        "Timeless Touch excels at creating elegant and memorable parties.",
       startPrice: "Starting from",
       price: "₦65,000",
       profileBtn: "View Profile",
     },
     {
       id: 7,
+      category: "Corporate Event",
       image: dreamscape,
       heading: "Dreamscape Events",
       description: "Event Decorator",
@@ -227,13 +231,14 @@ const PlannerSideBar = () => {
       vendorStar: plannerstar,
       vendorRating: "4.8 (88)",
       vendorDescription:
-        "Innovative design that reflect the essence of your celebration.",
+        "Innovative design that reflects the essence of your celebration.",
       startPrice: "Starting from",
       price: "₦85,000",
       profileBtn: "View Profile",
     },
     {
       id: 8,
+      category: "Conference",
       image: ledphoto,
       heading: "LED Photo Booth",
       description: "Photographer",
@@ -243,13 +248,14 @@ const PlannerSideBar = () => {
       vendorStar: plannerstar,
       vendorRating: "4.6 (39)",
       vendorDescription:
-        "Turn any event into an instant showstopper with this LED tunnel photo booth backdrop...",
+        "Turn any event into an instant showstopper with this LED tunnel photo booth backdrop.",
       startPrice: "Starting from",
       price: "₦68,000",
       profileBtn: "View Profile",
     },
     {
       id: 9,
+      category: "Naming Ceremony",
       image: hausafulani,
       heading: "Hausa Fulani Video",
       description: "Videographer",
@@ -259,13 +265,14 @@ const PlannerSideBar = () => {
       vendorStar: plannerstar,
       vendorRating: "4.9 (53)",
       vendorDescription:
-        "Experience the artistry of an Hausa Fulani event decorator who transforms venues",
+        "Experience the artistry of a Hausa Fulani event decorator who transforms venues.",
       startPrice: "Starting from",
       price: "₦73,000",
       profileBtn: "View Profile",
     },
     {
       id: 10,
+      category: "Book Launch",
       image: chefgift,
       heading: "Chef Gift",
       description: "Cake Baker",
@@ -282,6 +289,7 @@ const PlannerSideBar = () => {
     },
     {
       id: 11,
+      category: "Graduation",
       image: joyfulgathering,
       heading: "Joyful Gatherings",
       description: "Event Decoration & Styling",
@@ -298,6 +306,7 @@ const PlannerSideBar = () => {
     },
     {
       id: 12,
+      category: "Wedding",
       image: northenwedding,
       heading: "Northern Wedding",
       description: "Wedding Outfit",
@@ -307,39 +316,64 @@ const PlannerSideBar = () => {
       vendorStar: plannerstar,
       vendorRating: "4.8 (64)",
       vendorDescription:
-        "Crafting exquisite Northen wedding attire that blends trandition with elegance",
+        "Crafting exquisite Northern wedding attire that blends tradition with elegance.",
       startPrice: "Starting from",
       price: "₦88,000",
       profileBtn: "View Profile",
     },
   ];
 
+  const filteredVendors = recommendedVendors
+    .filter((vendor) => {
+      const search = searchTerm.toLowerCase();
+      return (
+        vendor.category.toLowerCase().includes(search) ||
+        vendor.heading.toLowerCase().includes(search) ||
+        vendor.description.toLowerCase().includes(search)
+      );
+    })
+    .sort((a, b) => {
+      if (filterBy === "price") {
+        return (
+          Number(a.price.replace(/[^\d]/g, "")) -
+          Number(b.price.replace(/[^\d]/g, ""))
+        );
+      }
+      if (filterBy === "location") {
+        return a.locationText.localeCompare(b.locationText);
+      }
+      if (filterBy === "rating") {
+        return parseFloat(b.vendorRating) - parseFloat(a.vendorRating);
+      }
+      return 0;
+    });
+
   return (
-    <div>
-      <div className="flex flex-col lg:flex-row w-full">
-        <aside className="w-full lg:w-72 shrink-0 border-b lg:border-b-0 lg:border-r border-border bg-white px-4 sm:px-6 py-6">
-          <div className="flex gap-5">
-            <Link to="/" className="flex gap-5">
-              <img
-                src={eventconnect}
-                alt="EventConnect Logo"
-                className="w-28 sm:w-32 lg:w-36"
-              />
-            </Link>
-          </div>
+    <div className="flex flex-col lg:flex-row w-full bg-white min-h-screen">
+      {/* Sidebar */}
+      <aside className="w-full lg:w-72 shrink-0 border-b lg:border-b-0 lg:border-r border-gray-200 bg-white px-4 sm:px-6 py-6">
+        <div className="flex gap-5">
+          <Link to="/" className="flex gap-5">
+            <img
+              src={eventconnect}
+              alt="EventConnect Logo"
+              className="w-28 sm:w-32 lg:w-36"
+            />
+          </Link>
+        </div>
 
-          <hr className="mt-6 border-gray-200" />
+        <hr className="mt-6 border-gray-200" />
 
+        <nav className="mt-4 flex flex-col gap-1">
           {plannerIcons.map((item) =>
             item.text === "Logout" ? (
               <button
                 key={item.id}
                 type="button"
                 onClick={handleLogout}
-                className="mt-2 flex w-full cursor-pointer items-center gap-3 rounded-lg px-4 py-3 text-left transition hover:bg-light-blue"
+                className="flex w-full cursor-pointer items-center gap-3 rounded-lg px-4 py-3 text-left transition hover:bg-light-blue"
               >
                 <img src={item.icon} alt={item.text} className="h-4 w-4" />
-
                 <span className="text-xs font-medium text-text">
                   {item.text}
                 </span>
@@ -348,273 +382,291 @@ const PlannerSideBar = () => {
               <Link
                 key={item.id}
                 to={item.path}
-                className="mt-2 flex items-center gap-3 rounded-lg px-4 py-3 transition hover:bg-light-blue"
+                className="flex items-center gap-3 rounded-lg px-4 py-3 transition hover:bg-light-blue"
               >
                 <img src={item.icon} alt={item.text} className="h-4 w-4" />
-
                 <span className="text-xs font-medium text-text">
                   {item.text}
                 </span>
               </Link>
             ),
           )}
-        </aside>
+        </nav>
+      </aside>
 
-        <div className="flex min-w-0 flex-col w-full">
-          <header className="flex flex-col gap-4 px-4 py-4 sm:flex-row sm:items-center sm:justify-between">
+      {/* Main Content Area */}
+      <div className="flex min-w-0 flex-col w-full">
+        {/* Header */}
+        <header className="flex flex-col gap-4 px-6 py-4 sm:flex-row sm:items-center sm:justify-between border-b border-gray-200">
+          <div>
+            <h1 className="font-semibold text-base text-gray-900">
+              Good Morning, Sarah 👋
+            </h1>
+            <p className="text-xs text-gray-500">
+              What event are you planning today?
+            </p>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <img
+              src={plannerheadshot}
+              alt="Sarah Adeyemi"
+              className="h-10 w-10 rounded-full object-cover"
+            />
             <div>
-              <h1 className="font-semibold text-base">
-                Good Morning, Sarah 👋
-              </h1>
-
-              <p className="text-xs text-gray">
-                What event are you planning today?
-              </p>
+              <h4 className="text-sm font-semibold leading-tight text-gray-900">
+                Sarah Adeyemi
+              </h4>
+              <span className="text-xs text-gray-500">Planner</span>
             </div>
+          </div>
+        </header>
 
-            <div className="flex items-center gap-2">
-              <img
-                src={plannerheadshot}
-                alt="Planner head shot"
-                className="h-10 w-10 rounded-full object-cover"
+        <main className="overflow-x-hidden p-6 space-y-8">
+          {/* Search & Filter */}
+          <div className="flex items-center gap-3">
+            <div className="relative flex-1">
+              <Search
+                size={16}
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+              />
+              <Search
+                size={14}
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
               />
 
-              <div>
-                <h4 className="text-sm font-semibold leading-tight">
-                  Sarah Adeyemi
-                </h4>
-
-                <span className="text-xs text-gray">Planner</span>
-              </div>
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder="Search Wedding, Birthday, Conference..."
+                className="w-full rounded-lg border border-gray-300 py-1.5 pl-8 pr-3 text-[10px] placeholder:text-[10px] focus:border-primary focus:outline-none"
+              />
             </div>
-          </header>
 
-          <hr className="mt-6 border-gray-200" />
+            <div className="relative">
+              <button
+                onClick={() => setShowFilters(!showFilters)}
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-gray-300 bg-white transition hover:border-primary hover:bg-light-blue"
+                title="Filter"
+              >
+                <SlidersHorizontal size={15} className="text-gray-600" />
+              </button>
 
-          <main className="overflow-x-hidden">
-            <div className="flex justify-between items-center p-5">
-              <h2 className="font-semibold text-md">Enquiry Status</h2>
-              <a href="" className="text-xs text-primary">
-                View all enquires
-              </a>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4">
-              {/* first card container with 2 inner card */}
-              <div className="first-card flex flex-col px-5 py-4 gap-3 border border-gray rounded-2xl">
-                <div className="flex items-center justify-between">
-                  <img
-                    src={plannerresponse2}
-                    alt="Planner Response Icon"
-                    className="w-9"
-                  />
-                  <span className="font-semibold text-lg">3</span>
+              {showFilters && (
+                <div className="absolute right-0 mt-2 w-44 rounded-lg border border-gray-200 bg-white shadow-lg z-50">
+                  {["", "price", "location", "rating"].map((type) => (
+                    <button
+                      key={type || "default"}
+                      onClick={() => {
+                        setFilterBy(type);
+                        setShowFilters(false);
+                      }}
+                      className="block w-full px-4 py-2.5 text-left text-sm hover:bg-gray-50 capitalize"
+                    >
+                      {type || "Default"}
+                    </button>
+                  ))}
                 </div>
+              )}
+            </div>
+          </div>
 
-                <div className="">
-                  <h4 className="text-xs font-semibold">
+          {/* Enquiry Status */}
+          <section>
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="font-semibold text-md text-gray-900">
+                Enquiry Status
+              </h2>
+              <Link
+                to="/planner/enquiries"
+                className="text-xs text-primary hover:underline"
+              >
+                View all enquiries
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="flex flex-col px-5 py-4 gap-3 border border-gray-200 rounded-2xl bg-white">
+                <div className="flex items-center justify-between">
+                  <img src={plannerresponse2} alt="Waiting" className="w-9" />
+                  <span className="font-semibold text-lg text-gray-900">3</span>
+                </div>
+                <div>
+                  <h4 className="text-xs font-semibold text-gray-900">
                     Waiting for Response
                   </h4>
-                  <span className="text-xs text-gray">
+                  <span className="text-xs text-gray-500">
                     Awaiting vendor reply
                   </span>
                 </div>
               </div>
 
-              {/* second card container with 2 inner card */}
-              <div className="second-container flex flex-col px-5 py-4 gap-3 border border-gray rounded-2xl">
+              <div className="flex flex-col px-5 py-4 gap-3 border border-gray-200 rounded-2xl bg-white">
                 <div className="flex items-center justify-between">
-                  <img src={planneraccepted} alt="Planner Accepted Icon" />
-                  <span className="font-semibold text-lg">5</span>
+                  <img src={planneraccepted} alt="Accepted" className="w-9" />
+                  <span className="font-semibold text-lg text-gray-900">5</span>
                 </div>
-
                 <div>
-                  <h4 className="text-xs font-semibold">Accepted</h4>
-                  <p className="text-xs text-gray">Confirmed bookings</p>
+                  <h4 className="text-xs font-semibold text-gray-900">
+                    Accepted
+                  </h4>
+                  <p className="text-xs text-gray-500">Confirmed bookings</p>
                 </div>
               </div>
 
-              {/* third card  container with 2 inner card */}
-              <div className="third-card flex flex-col px-5 py-4 gap-3 border border-gray rounded-2xl">
+              <div className="flex flex-col px-5 py-4 gap-3 border border-gray-200 rounded-2xl bg-white">
                 <div className="flex items-center justify-between">
-                  <img
-                    src={plannercompleted}
-                    alt="Planner Completed Icon"
-                    className="w-9"
-                  />
-                  <span className="font-semibold text-lg">12</span>
+                  <img src={plannercompleted} alt="Completed" className="w-9" />
+                  <span className="font-semibold text-lg text-gray-900">
+                    12
+                  </span>
                 </div>
-
                 <div>
-                  <h4 className="text-xs font-semibold">Completed</h4>
-                  <p className="text-xs text-gray">Event concluded</p>
+                  <h4 className="text-xs font-semibold text-gray-900">
+                    Completed
+                  </h4>
+                  <p className="text-xs text-gray-500">Event concluded</p>
                 </div>
               </div>
             </div>
-            <section className="mt-10">
-              <div className="flex flex-col gap-4 p-5">
-                <h2 className="font-semibold text-md">
-                  What type of event are you planning?
-                </h2>
+          </section>
 
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 gap-4">
-                  <div className="border border-primary p-5  rounded-2xl h-24 flex flex-col justify-center items-center gap-3">
-                    <img src={wedding} alt="Wedding Image" className="w-8" />
-                    <span className="font-semibold text-xs">Wedding</span>
-                  </div>
-
-                  <div className="border border-gray p-5  rounded-2xl h-24 flex flex-col justify-center items-center gap-3">
-                    <img src={birthday} alt="birthday image" className="w-8" />
-                    <span className="font-semibold text-xs">Birthday</span>
-                  </div>
-
-                  <div className="border border-gray p-5  rounded-2xl h-24 flex flex-col justify-center items-center gap-3">
-                    <img src={naming} alt="Naming image" className="w-8" />
-                    <span className="font-semibold text-xs">
-                      Naming Ceremony
-                    </span>
-                  </div>
-
-                  <div className="border border-gray p-5  rounded-2xl h-24 flex flex-col justify-center items-center gap-3">
-                    <img
-                      src={conference}
-                      alt="conference image"
-                      className="w-8"
-                    />
-                    <span className="font-semibold text-xs">conference</span>
-                  </div>
-
-                  <div className="border border-gray p-5  rounded-2xl h-24 flex flex-col justify-center items-center gap-3">
-                    <img
-                      src={booklaunch}
-                      alt="booklaunch image"
-                      className="w-8"
-                    />
-                    <span className="font-semibold text-xs">book launch</span>
-                  </div>
-
-                  <div className="border border-gray p-5  rounded-2xl h-24 flex flex-col justify-center items-center gap-3">
-                    <img
-                      src={graduation}
-                      alt="graduation image"
-                      className="w-8"
-                    />
-                    <span className="font-semibold text-xs">graduation</span>
-                  </div>
-
-                  <div className="border border-gray p-5  rounded-2xl h-24 flex flex-col justify-center items-center gap-3">
-                    <img
-                      src={coparatevent}
-                      alt="coparatevent image"
-                      className="w-8"
-                    />
-                    <span className="font-semibold text-xs">
-                      coparate Event
-                    </span>
-                  </div>
+          {/* Event Categories */}
+          <section>
+            <h2 className="font-semibold text-md text-gray-900 mb-4">
+              What type of event are you planning?
+            </h2>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 gap-4">
+              {[
+                { label: "Wedding", img: wedding, active: true },
+                { label: "Birthday", img: birthday },
+                { label: "Naming Ceremony", img: naming },
+                { label: "Conference", img: conference },
+                { label: "Book Launch", img: booklaunch },
+                { label: "Graduation", img: graduation },
+                { label: "Corporate Event", img: coparatevent },
+              ].map((item) => (
+                <div
+                  key={item.label}
+                  className={`p-4 rounded-2xl h-24 flex flex-col justify-center items-center gap-2 cursor-pointer transition border ${
+                    item.active
+                      ? "border-primary bg-primary/5"
+                      : "border-gray-200 hover:border-gray-300"
+                  }`}
+                >
+                  <img
+                    src={item.img}
+                    alt={item.label}
+                    className="w-8 h-8 object-contain"
+                  />
+                  <span className="font-semibold text-xs text-center">
+                    {item.label}
+                  </span>
                 </div>
-              </div>
-            </section>
-            {/* Recommended videos section */}
-            <section className="mt-3">
-              <div className="flex gap-4 p-5  justify-between items-center ">
-                <h2 className="font-semibold text-md">Recommended Videos</h2>
-                <a href="" className="text-xs text-primary">
-                  View all
-                </a>
-              </div>
+              ))}
+            </div>
+          </section>
 
-              <div className="grid grid-cols-1 gap-6 px-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                {recommendedVendors.map((vendor) => (
+          {/* Recommended Vendors Section */}
+          <section>
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="font-semibold text-md text-gray-900">
+                Recommended Vendors
+              </h2>
+              <Link
+                to="/planner/discover-vendors"
+                className="text-xs text-primary hover:underline"
+              >
+                View all
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {filteredVendors.length > 0 ? (
+                filteredVendors.map((vendor) => (
                   <div
                     key={vendor.id}
                     className="flex flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
                   >
-                    {/* Vendor Image */}
                     <img
                       src={vendor.image}
                       alt={vendor.heading}
                       className="w-full h-28 object-cover rounded-t-2xl"
                     />
 
-                    {/* Vendor Details */}
                     <div className="flex items-center justify-between p-4">
                       <div>
-                        <h3 className="text-sm font-semibold text-text">
+                        <h3 className="text-sm font-semibold text-gray-900">
                           {vendor.heading}
                         </h3>
-
                         <p className="mt-1 text-[11px] font-medium text-primary">
                           {vendor.description}
                         </p>
                       </div>
-
                       <img
                         src={vendor.icon}
-                        alt={`${vendor.heading} logo`}
+                        alt=""
                         className="h-8 w-8 rounded-full object-cover"
                       />
                     </div>
 
-                    {/* Vendor Location */}
                     <div className="flex items-center gap-2 px-4 pb-2">
-                      <img
-                        src={vendor.location}
-                        alt="Location"
-                        className="h-3 w-3"
-                      />
-
-                      <p className="text-xs text-gray">{vendor.locationText}</p>
+                      <img src={vendor.location} alt="" className="h-3 w-3" />
+                      <p className="text-xs text-gray-500">
+                        {vendor.locationText}
+                      </p>
                     </div>
 
-                    {/* Vendor Rating */}
-                    <div className="flex items-center gap-2 px-4 pb-3 pt-1">
-                      <img
-                        src={vendor.vendorStar}
-                        alt="Rating"
-                        className="h-3 w-3"
-                      />
-
-                      <p className="text-xs font-semibold">
+                    <div className="flex items-center gap-2 px-4 pb-3">
+                      <img src={vendor.vendorStar} alt="" className="h-3 w-3" />
+                      <p className="text-xs font-semibold text-gray-900">
                         {vendor.vendorRating}
                       </p>
                     </div>
 
-                    {/* Vendor Profile Description */}
                     <div className="px-4">
-                      <p
-                        className="text-xs leading-5 text-gray font-medium min-h-[60px]"
-                        title={vendor.vendorDescription}
-                      >
+                      <p className="min-h-[60px] text-xs leading-5 text-gray-500">
                         {vendor.vendorDescription}
                       </p>
                     </div>
 
-                    {/* Vendor Pricing */}
-                    <div className="mt-auto flex items-center justify-between border-t border-gray-200 p-4">
+                    <div className="mt-auto flex items-center justify-between border-t border-gray-100 p-4">
                       <div>
-                        <h3 className="text-xs text-gray">
+                        <p className="text-xs text-gray-500">
                           {vendor.startPrice}
-                        </h3>
-
-                        <p className="mt-1 text-xs font-bold">{vendor.price}</p>
+                        </p>
+                        <p className="text-xs font-bold text-gray-900">
+                          {vendor.price}
+                        </p>
                       </div>
 
                       <Link
                         to={`/vendor/${vendor.id}`}
-                        className="rounded border border-primary px-2 py-1 text-[11px] font-medium text-primary hover:bg-primary hover:text-white transition"
+                        className="rounded border border-primary px-2.5 py-1 text-[11px] font-medium text-primary transition hover:bg-primary hover:text-white"
                       >
                         {vendor.profileBtn}
                       </Link>
                     </div>
                   </div>
-                ))}
-              </div>
-            </section>
+                ))
+              ) : (
+                <div className="col-span-full py-16 text-center">
+                  <h2 className="text-lg font-semibold text-gray-900">
+                    No Vendors Found
+                  </h2>
+                  <p className="mt-2 text-sm text-gray-500">
+                    Try searching for Wedding, Birthday, Conference, Graduation,
+                    Naming Ceremony, Book Launch, or Corporate Event.
+                  </p>
+                </div>
+              )}
+            </div>
+          </section>
 
-            <PlannerServiceCategory />
-            <PlannerFeaturePortfolio />
-          </main>
-        </div>
+          <PlannerServiceCategory />
+          <PlannerFeaturePortfolio />
+        </main>
       </div>
     </div>
   );

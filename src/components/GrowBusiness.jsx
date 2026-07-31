@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom";
+import { Link as ScrollLink } from "react-scroll";
+
 import businesicon from "../assets/icons/businesicon.png";
 import growbusiness from "../assets/images/growbusiness.png";
 
@@ -10,15 +13,18 @@ const benefits = [
 
 const GrowBusiness = () => {
   return (
-    <section className="max-w-7xl mx-auto px-6 py-16 lg:py-20" id="grow-business">
-      <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-12">
+    <section
+      className="mx-auto max-w-7xl px-6 py-16 lg:py-20"
+      id="grow-business"
+    >
+      <div className="flex flex-col-reverse items-center justify-between gap-12 lg:flex-row">
         {/* Left Content */}
         <div className="w-full lg:w-1/2">
-          <h2 className="text-3xl sm:text-4xl font-bold leading-tight mb-4">
+          <h2 className="mb-4 text-3xl font-bold leading-tight sm:text-4xl">
             Grow your event business with EventConnect
           </h2>
 
-          <p className="text-gray leading-7 mb-6 max-w-lg">
+          <p className="mb-6 max-w-lg leading-7 text-gray">
             Join a marketplace built to help talented vendors get discovered,
             booked, and reviewed by planners who are ready to hire.
           </p>
@@ -31,7 +37,7 @@ const GrowBusiness = () => {
                   src={businesicon}
                   alt=""
                   aria-hidden="true"
-                  className="w-5 h-5 flex-shrink-0"
+                  className="h-5 w-5 flex-shrink-0"
                 />
 
                 <span className="text-base">{benefit}</span>
@@ -40,22 +46,32 @@ const GrowBusiness = () => {
           </ul>
 
           {/* Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 mt-8">
-            <button className="w-full sm:w-auto px-6 py-3 bg-primary text-white rounded-lg font-medium transition hover:opacity-90">
+          <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+            <Link
+              to="/sign-up"
+              className="w-full rounded-lg bg-primary px-6 py-3 text-center font-medium text-white transition hover:opacity-90 sm:w-auto"
+            >
               Become a Vendor
-            </button>
+            </Link>
 
-            <button className="w-full sm:w-auto px-6 py-3 border border-primary rounded-lg font-medium transition hover:bg-primary hover:text-white">
+            <ScrollLink
+              to="how-it-works"
+              smooth={true}
+              duration={500}
+              offset={-90}
+              className="w-full cursor-pointer rounded-lg border border-primary px-6 py-3 text-center font-medium transition hover:bg-primary hover:text-white sm:w-auto"
+            >
               See how it works
-            </button>
+            </ScrollLink>
           </div>
         </div>
 
-        <div className="w-full lg:w-1/2 flex justify-center">
+        {/* Right Image */}
+        <div className="flex w-full justify-center lg:w-1/2">
           <img
             src={growbusiness}
             alt="Vendor using EventConnect"
-            className="w-full md:w-[80%] lg:w-[420px] xl:w-[480px] h-auto object-contain"
+            className="h-auto w-full object-contain md:w-[80%] lg:w-[420px] xl:w-[480px]"
           />
         </div>
       </div>

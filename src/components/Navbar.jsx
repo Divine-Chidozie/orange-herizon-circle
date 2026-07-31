@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -8,6 +8,8 @@ import eventconnect from "../assets/logos/eventconnect.svg";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const location = useLocation();
 
   const hasAccount = !!localStorage.getItem("hasAccount");
 
@@ -27,8 +29,26 @@ const Navbar = () => {
     <header className="fixed top-0 left-0 z-50 w-full border-b border-border bg-white shadow-sm">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         {/* Logo */}
-        <Link to="/" onClick={closeMenu}>
-          <img src={eventconnect} alt="EventConnect Logo" className="w-36" />
+        <Link
+          to="/"
+          onClick={(e) => {
+            closeMenu();
+
+            if (location.pathname === "/") {
+              e.preventDefault();
+
+              window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+              });
+            }
+          }}
+        >
+          <img
+            src={eventconnect}
+            alt="EventConnect Logo"
+            className="w-36 cursor-pointer"
+          />
         </Link>
 
         {/* Desktop Navigation */}
@@ -36,16 +56,25 @@ const Navbar = () => {
           <ul className="flex items-center gap-8 text-sm text-gray">
             {navLinks.map((link) => (
               <li key={link.id}>
-                <ScrollLink
-                  to={link.id}
-                  smooth={true}
-                  duration={400}
-                  offset={-90}
-                  spy={true}
-                  className="cursor-pointer transition hover:text-primary"
-                >
-                  {link.name}
-                </ScrollLink>
+                {location.pathname === "/" ? (
+                  <ScrollLink
+                    to={link.id}
+                    smooth={true}
+                    duration={400}
+                    offset={-90}
+                    spy={true}
+                    className="cursor-pointer transition hover:text-primary"
+                  >
+                    {link.name}
+                  </ScrollLink>
+                ) : (
+                  <Link
+                    to={`/#${link.id}`}
+                    className="cursor-pointer transition hover:text-primary"
+                  >
+                    {link.name}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>
@@ -97,16 +126,26 @@ const Navbar = () => {
               <ul className="flex flex-col gap-5 text-sm text-gray">
                 {navLinks.map((link) => (
                   <li key={link.id}>
-                    <ScrollLink
-                      to={link.id}
-                      smooth={true}
-                      duration={400}
-                      offset={-90}
-                      onClick={closeMenu}
-                      className="block cursor-pointer transition hover:text-primary"
-                    >
-                      {link.name}
-                    </ScrollLink>
+                    {location.pathname === "/" ? (
+                      <ScrollLink
+                        to={link.id}
+                        smooth={true}
+                        duration={400}
+                        offset={-90}
+                        onClick={closeMenu}
+                        className="block cursor-pointer transition hover:text-primary"
+                      >
+                        {link.name}
+                      </ScrollLink>
+                    ) : (
+                      <Link
+                        to={`/#${link.id}`}
+                        onClick={closeMenu}
+                        className="block cursor-pointer transition hover:text-primary"
+                      >
+                        {link.name}
+                      </Link>
+                    )}
                   </li>
                 ))}
 
