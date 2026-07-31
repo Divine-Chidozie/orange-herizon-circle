@@ -21,21 +21,33 @@ export default function SignUp() {
   async function handleForm(e) {
     e.preventDefault();
 
+    // ==========================================
+    // Validate Account Type
+    // ==========================================
     if (!accountType) {
       alert("Please select an account type.");
       return;
     }
 
+    // ==========================================
+    // Validate Password Match
+    // ==========================================
     if (password !== confirmPassword) {
       alert("Passwords do not match.");
       return;
     }
 
+    // ==========================================
+    // Validate Terms & Conditions
+    // ==========================================
     if (!termsAccepted) {
       alert("Please accept the Terms & Conditions.");
       return;
     }
 
+    // ==========================================
+    // User Data
+    // ==========================================
     const userData = {
       firstName,
       lastName,
@@ -46,39 +58,20 @@ export default function SignUp() {
     };
 
     setLoading(true);
+
     try {
-      // Register the user
+      // ==========================================
+      // Register User
+      // ==========================================
       await axios.post(`${BASE_URL}/api/auth/register`, userData, {
         headers: {
           "Content-Type": "application/json",
         },
       });
 
-      // Automatically log the user in
-      const loginResponse = await axios.post(
-        `${BASE_URL}/api/auth/login`,
-        {
-          email,
-          password,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        },
-      );
-
-      const { token, data } = loginResponse.data;
-
-      if (token) {
-        localStorage.setItem("token", token);
-      }
-
-      if (data) {
-        localStorage.setItem("user", JSON.stringify(data));
-      }
-
-      // Clear form
+      // ==========================================
+      // Clear Form
+      // ==========================================
       setAccountType("");
       setFirstName("");
       setLastName("");
@@ -87,14 +80,11 @@ export default function SignUp() {
       setConfirmPassword("");
       setTermsAccepted(false);
 
-      // Redirect based on role
-      if (data.role === "ORGANIZER") {
-        navigate("/planner/dashboard");
-      } else if (data.role === "VENDOR") {
-        navigate("/vendor/dashboard");
-      } else {
-        navigate("/");
-      }
+      // ==========================================
+      // DO NOT LOGIN HERE
+      // Send user to Account Created page
+      // ==========================================
+      navigate("/account-created");
     } catch (error) {
       if (error.response?.data?.errors?.length) {
         alert(error.response.data.errors[0].msg);
