@@ -446,11 +446,11 @@ const PlannerSideBar = () => {
                 className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-gray-300 bg-white transition hover:border-primary hover:bg-light-blue"
                 title="Filter"
               >
-                <SlidersHorizontal size={15} className="text-gray-600" />
+                <SlidersHorizontal size={14} className="text-gray-600" />
               </button>
 
               {showFilters && (
-                <div className="absolute right-0 z-50 mt-2 w-44 rounded-lg border border-gray-200 bg-white shadow-lg">
+                <div className="absolute right-0 z-50 mt-2 w-28 rounded-lg border border-gray-200 bg-white shadow-lg">
                   {["", "price", "location", "rating"].map((type) => (
                     <button
                       key={type || "default"}
@@ -458,7 +458,8 @@ const PlannerSideBar = () => {
                         setFilterBy(type);
                         setShowFilters(false);
                       }}
-                      className="block w-full px-4 py-2.5 text-left text-sm capitalize hover:bg-gray-50"
+                      style={{ fontSize: "13px" }}
+                      className="block w-full px-3 py-1.5 text-left text-[10px] capitalize hover:bg-gray-50"
                     >
                       {type || "Default"}
                     </button>
