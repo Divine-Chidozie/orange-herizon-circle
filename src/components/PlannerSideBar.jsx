@@ -441,7 +441,7 @@ const PlannerSideBar = () => {
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Search Wedding, Birthday, Conference..."
                 className="w-full rounded-lg border border-gray-300 py-1.5 pl-8 pr-3 text-[10px] placeholder:text-[10px] focus:border-primary focus:outline-none"
-              />
+              />a
             </div>
 
             <div className="relative">

@@ -9,19 +9,19 @@ import AccountCreated from "../pages/auth/AccountCreated";
 import PlannerDashboard from "../pages/planner/PlannerDashboard";
 import VendorDashboard from "../pages/vendor/VendorDashboard";
 import Page500 from "../pages/error/Page500";
-// import Offline from "../pages/error/Offline";
+import Offline from "../pages/error/Offline";
 import SessionExpired from "../pages/error/SessionExpired";
 import AccessDenied from "../pages/error/AccessDenied";
 import ServerDelay from "../pages/error/ServerDelay";
-import PlannerVerification from "../pages/planner/Plannerverification";
-import VendorVerification from "../pages/vendor/Vendorverification";
+import PlannerVerification from "../pages/planner/PlannerVerification";
+import VendorVerification from "../pages/vendor/VendorVerification";
 
-// import NetworkListener from "../components/NetworkListener";
+import NetworkListener from "../components/NetworkListener";
 
 function AppContent() {
   return (
     <>
-      {/* <NetworkListener /> */}
+      <NetworkListener />
 
       <Routes>
         <Route path="/" element={<Home />} />
@@ -33,7 +33,7 @@ function AppContent() {
         <Route path="/planner/dashboard" element={<PlannerDashboard />} />
         <Route path="/vendor/dashboard" element={<VendorDashboard />} />
         <Route path="/page-500" element={<Page500 />} />
-        {/* <Route path="/offline" element={<Offline />} /> */}
+        <Route path="/offline" element={<Offline />} />
         <Route path="/session-expired" element={<SessionExpired />} />
         <Route path="/access-denied" element={<AccessDenied />} />
         <Route path="/server-delay" element={<ServerDelay />} />
