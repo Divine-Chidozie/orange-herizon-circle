@@ -430,18 +430,14 @@ const PlannerSideBar = () => {
                 size={16}
                 className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
               />
-              <Search
-                size={14}
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
-              />
 
               <input
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Search Wedding, Birthday, Conference..."
-                className="w-full rounded-lg border border-gray-300 py-1.5 pl-8 pr-3 text-[10px] placeholder:text-[10px] focus:border-primary focus:outline-none"
-              />a
+                className="w-full rounded-lg border border-gray-300 py-2 pl-9 pr-3 text-xs placeholder:text-xs focus:border-primary focus:outline-none"
+              />
             </div>
 
             <div className="relative">
@@ -454,7 +450,7 @@ const PlannerSideBar = () => {
               </button>
 
               {showFilters && (
-                <div className="absolute right-0 mt-2 w-44 rounded-lg border border-gray-200 bg-white shadow-lg z-50">
+                <div className="absolute right-0 z-50 mt-2 w-44 rounded-lg border border-gray-200 bg-white shadow-lg">
                   {["", "price", "location", "rating"].map((type) => (
                     <button
                       key={type || "default"}
@@ -462,7 +458,7 @@ const PlannerSideBar = () => {
                         setFilterBy(type);
                         setShowFilters(false);
                       }}
-                      className="block w-full px-4 py-2.5 text-left text-sm hover:bg-gray-50 capitalize"
+                      className="block w-full px-4 py-2.5 text-left text-sm capitalize hover:bg-gray-50"
                     >
                       {type || "Default"}
                     </button>
