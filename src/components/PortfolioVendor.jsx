@@ -6,7 +6,7 @@ import annuelLeadership from "../assets/images/annuelLeadership.png";
 import kasugraduation from "../assets/images/kasugraduation.png";
 
 import star2 from "../assets/icons/star2.png";
-import plannerLocation from "../assets/icons/plannerLocation.png";
+import plannerLocation from "../assets/icons/plannerlocation.png";
 import carlender from "../assets/icons/carlender.png";
 
 const PortfolioVendor = () => {

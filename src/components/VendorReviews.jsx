@@ -8,7 +8,7 @@ import petal from "../assets/images/petal.png";
 import lumen from "../assets/images/lumen.png";
 import regal from "../assets/images/regal.png";
 
-import plannerlocation from "../assets/icons/plannerLocation.png";
+import plannerlocation from "../assets/icons/plannerlocation.png";
 
 const ratings = [
   { star: 5, count: 182, percentage: 85 },
