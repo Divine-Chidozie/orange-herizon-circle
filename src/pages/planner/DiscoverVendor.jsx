@@ -5,7 +5,7 @@ import PricingVendor from "../../components/PricingVendor";
 import eventconnect from "../../assets/logos/eventconnect.svg";
 import plannerheadshot from "../../assets/icons/plannerheadshot.png";
 
-import back from "../../assets/icons/back.png";
+import back from "../../assets/icons/Back.png";
 
 import vendorprofilecoverimg from "../../assets/images/vendorprofilecoverimg.png";
 import bloomco from "../../assets/images/bloomco.png";
@@ -113,7 +113,9 @@ function DiscoverVendor() {
                 Bloom & Co. Events
               </h1>
 
-              <p className="text-sm text-primary">Event Decorations & Styling</p>
+              <p className="text-sm text-primary">
+                Event Decorations & Styling
+              </p>
             </div>
           </div>
 
