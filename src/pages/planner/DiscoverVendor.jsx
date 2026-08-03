@@ -113,7 +113,7 @@ function DiscoverVendor() {
                 Bloom & Co. Events
               </h1>
 
-              <p className="text-sm text-primary">Event Decoration & Styling</p>
+              <p className="text-sm text-primary">Event Decorations & Styling</p>
             </div>
           </div>
 
